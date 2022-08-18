@@ -68,6 +68,11 @@ class AppResponse {
     dynamic error,
     StackTrace? stackTrace,
   }) {
+    developer.log(
+      id,
+      error: error,
+      stackTrace: stackTrace,
+    );
     return AppResponse(
       id: id,
       statusCode: AppStatusCode.error,

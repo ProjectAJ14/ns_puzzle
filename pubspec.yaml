@@ -25,6 +25,7 @@ dependencies:
       url: https://github.com/ajaykumargithub2114/ns_utils
       ref: ajay/feat/flutter-302
   flutter_signin_button: ^2.0.0
+  neopop: ^1.0.2
 
 dev_dependencies:
   flutter_test:

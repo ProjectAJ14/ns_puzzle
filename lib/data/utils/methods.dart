@@ -35,3 +35,42 @@ String getExceptionMessage(
 
   return finalMessage;
 }
+
+extension DurationExtensions on Duration {
+  /// Converts the duration into a readable string
+  /// 05:15
+  String toHoursMinutes() {
+    String twoDigitMinutes = _toTwoDigits(inMinutes.remainder(60));
+    return "${_toTwoDigits(inHours)}:$twoDigitMinutes";
+  }
+
+  /// Converts the duration into a readable string
+  /// 05:15:35
+  String toHoursMinutesSeconds() {
+    String twoDigitMinutes = _toTwoDigits(inMinutes.remainder(60));
+    String twoDigitSeconds = _toTwoDigits(inSeconds.remainder(60));
+    return "${_toTwoDigits(inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+  }
+
+  /// Converts the duration into a readable string
+  /// 05:15:35:000
+  String toHoursMinutesSecondsMilliseconds() {
+    String twoDigitMinutes = _toTwoDigits(inMinutes.remainder(60));
+    String twoDigitSeconds = _toTwoDigits(inSeconds.remainder(60));
+    String threeDigitMilliseconds =
+        _toThreeDigits(inMilliseconds.remainder(1000));
+    return "${_toTwoDigits(inHours)}:$twoDigitMinutes:$twoDigitSeconds"
+        ":$threeDigitMilliseconds";
+  }
+
+  String _toTwoDigits(int n) {
+    if (n >= 10) return "$n";
+    return "0$n";
+  }
+
+  String _toThreeDigits(int n) {
+    if (n >= 100) return "$n";
+    if (n >= 10) return "0$n";
+    return "00$n";
+  }
+}

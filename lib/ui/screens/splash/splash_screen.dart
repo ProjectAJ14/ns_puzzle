@@ -15,7 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 2000), redirectUser);
+    Get.offAllNamed(RouteConstants.home);
+
+    // Future.delayed(const Duration(milliseconds: 100), redirectUser);
   }
 
   Future<void> redirectUser() async {
