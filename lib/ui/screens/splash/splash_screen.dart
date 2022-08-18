@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/services/auth/auth_service.dart';
-import '../home/home_screen.dart';
-import '../sign_in/sign_in_screen.dart';
+import '../../routes/route_constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -20,10 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> redirectUser() async {
-    if (!auth.isAuthenticated) {
-      Get.off(() => const HomeScreen());
+    if (auth.isAuthenticated) {
+      Get.offAllNamed(RouteConstants.home);
     } else {
-      Get.off(() => const SignInScreen());
+      Get.offAllNamed(RouteConstants.signIn);
     }
   }
 
