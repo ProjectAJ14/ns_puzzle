@@ -1,0 +1,70 @@
+name: ns_puzzle
+description: Nonstop Puzzle Game
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  get: ^4.6.5
+  flutter_easyloading: ^3.0.5
+  shared_preferences: ^2.0.15
+  ns_firebase_utils:
+    git:
+      url: https://github.com/ajaykumargithub2114/ns_firebase_utils
+      ref: dev
+
+  ns_utils:
+    git:
+      url: https://github.com/ajaykumargithub2114/ns_utils
+      ref: ajay/feat/flutter-302
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.9.2
+
+flutter:
+
+  uses-material-design: true
+
+  #ASSETS
+  assets:
+    - assets/
+    - assets/icons/
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
