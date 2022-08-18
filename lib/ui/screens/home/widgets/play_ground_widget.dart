@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/constant.dart';
-
 class PlayGroundWidget extends StatelessWidget {
   const PlayGroundWidget({
     Key? key,
@@ -11,6 +9,7 @@ class PlayGroundWidget extends StatelessWidget {
     this.bottomLeftSideWidget,
     this.bottomRightSideWidget,
     this.bottomCenterWidget,
+    required this.subjectWidth,
   }) : super(key: key);
 
   final Widget? leftSideWidget;
@@ -19,6 +18,7 @@ class PlayGroundWidget extends StatelessWidget {
   final Widget? bottomLeftSideWidget;
   final Widget? bottomRightSideWidget;
   final Widget? bottomCenterWidget;
+  final double subjectWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class PlayGroundWidget extends StatelessWidget {
     Widget? child,
   }) {
     return Container(
-      width: subjectWidth * 7,
+      width: subjectWidth * 6,
       color: color,
       child: child,
     );

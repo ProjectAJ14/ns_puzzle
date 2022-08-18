@@ -15,16 +15,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Get.offAllNamed(RouteConstants.home);
 
-    // Future.delayed(const Duration(milliseconds: 100), redirectUser);
+    Future.delayed(const Duration(milliseconds: 2000), redirectUser);
   }
 
   Future<void> redirectUser() async {
+    Get.offNamed(RouteConstants.home);
+    return;
     if (auth.isAuthenticated) {
-      Get.offAllNamed(RouteConstants.home);
+      Get.offNamed(RouteConstants.home);
     } else {
-      Get.offAllNamed(RouteConstants.signIn);
+      Get.offNamed(RouteConstants.signIn);
     }
   }
 

@@ -148,7 +148,7 @@ class HomeController extends GetxController {
     }
     int totalDevils = leftList.whereType<Devil>().length;
     int totalPriests = leftList.whereType<Priest>().length;
-    if (totalDevils > totalPriests) {
+    if (totalDevils > totalPriests && totalPriests > 0) {
       endGame();
       return;
     }
@@ -159,19 +159,19 @@ class HomeController extends GetxController {
     }
     totalDevils = rightList.whereType<Devil>().length;
     totalPriests = rightList.whereType<Priest>().length;
-    if (totalDevils > totalPriests) {
+    if (totalDevils > totalPriests && totalPriests > 0) {
       endGame();
     }
   }
 
   void endGame() {
     endTime = DateTime.now();
-    leftSide.clear();
-    rightSide.clear();
-    onBoat.clear();
-    leftSide.insert(0, Devil());
-    rightSide.insert(0, Devil());
-    onBoat.insert(0, Devil());
+    // leftSide.clear();
+    // rightSide.clear();
+    // onBoat.clear();
+    // leftSide.insert(0, Devil());
+    // rightSide.insert(0, Devil());
+    // onBoat.insert(0, Devil());
     alignment = Alignment.bottomCenter;
     update();
   }

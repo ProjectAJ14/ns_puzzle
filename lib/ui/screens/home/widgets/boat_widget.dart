@@ -2,23 +2,23 @@ import 'dart:math' as math; // import this
 
 import 'package:flutter/material.dart';
 
-import '../../../../data/models/subjects.dart';
-import '../../../utils/constant.dart';
-import 'subject_widget.dart';
-
 class BoatWidget extends StatelessWidget {
   const BoatWidget({
     Key? key,
     required this.isBoatOnLeftSide,
-    required this.subjects,
     required this.alignment,
-    required this.onSubjectTap,
+    required this.children,
+    required this.boatWidth,
+    required this.boatHeight,
+    required this.boatPadding,
   }) : super(key: key);
 
   final bool isBoatOnLeftSide;
-  final List<Subject> subjects;
   final AlignmentGeometry alignment;
-  final Function(Subject subject) onSubjectTap;
+  final List<Widget> children;
+  final double boatWidth;
+  final double boatHeight;
+  final double boatPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -43,18 +43,11 @@ class BoatWidget extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: 30,
+              bottom: boatPadding,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: subjects
-                    .map(
-                      (subject) => SubjectWidget(
-                        onSubjectTap: onSubjectTap,
-                        subject: subject,
-                      ),
-                    )
-                    .toList(),
+                children: children,
               ),
             ),
           ],
