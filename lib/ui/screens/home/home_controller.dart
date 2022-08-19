@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,17 @@ class HomeController extends GetxController {
 
   bool get isGameEnded => endTime != null;
 
+  bool get isWinner => isGameEnded && leftSide.length == 6;
+
+  ConfettiController confettiController =
+      ConfettiController(duration: const Duration(seconds: 10));
+
+  @override
+  void onClose() {
+    confettiController.dispose();
+    super.onClose();
+  }
+
   Stream<int> gameStream = Stream.periodic(
     const Duration(milliseconds: 1),
     (index) => index,
@@ -44,7 +56,7 @@ class HomeController extends GetxController {
 
   List<Subject> onBoat = [];
 
-  moveBoat() {
+  void moveBoat() {
     if (onBoat.isEmpty) {
       Get.snackbar(
         'Error',
@@ -54,6 +66,12 @@ class HomeController extends GetxController {
         colorText: Colors.white,
         borderRadius: 10,
       );
+      //force win
+      onBoat.insert(0, rightSide.first);
+      rightSide.removeAt(0);
+      leftSide.addAll(rightSide);
+      rightSide.clear();
+      update();
       return;
     }
     disableInteraction = true;
@@ -74,7 +92,7 @@ class HomeController extends GetxController {
     );
   }
 
-  startGame() {
+  void startGame() {
     startTime = DateTime.now();
     update();
   }
@@ -122,6 +140,7 @@ class HomeController extends GetxController {
       }
     }
     update();
+    checkWin();
   }
 
   String playingTime() {
@@ -141,38 +160,42 @@ class HomeController extends GetxController {
   }
 
   void checkGameEnd() {
-    // Check if devils are more than priests on left side including the boat
-    List<Subject> leftList = [...leftSide];
-    if (isBoatOnLeftSide) {
-      leftList.addAll(onBoat);
-    }
-    int totalDevils = leftList.whereType<Devil>().length;
-    int totalPriests = leftList.whereType<Priest>().length;
-    if (totalDevils > totalPriests && totalPriests > 0) {
-      endGame();
-      return;
-    }
     // Check if devils are more than priests on right side including the boat
     List<Subject> rightList = [...rightSide];
     if (isBoatOnRightSide) {
       rightList.addAll(onBoat);
     }
-    totalDevils = rightList.whereType<Devil>().length;
-    totalPriests = rightList.whereType<Priest>().length;
+    int totalDevils = rightList.whereType<Devil>().length;
+    int totalPriests = rightList.whereType<Priest>().length;
     if (totalDevils > totalPriests && totalPriests > 0) {
+      endGame();
+      return;
+    }
+    // Check if devils are more than priests on left side including the boat
+    List<Subject> leftList = [...leftSide];
+    if (isBoatOnLeftSide) {
+      leftList.addAll(onBoat);
+    }
+    totalDevils = leftList.whereType<Devil>().length;
+    totalPriests = leftList.whereType<Priest>().length;
+    if (totalDevils > totalPriests && totalPriests > 0) {
+      endGame();
+      return;
+    }
+  }
+
+  void checkWin() {
+    // Check if all devils and all priests are on the left side
+    int totalDevils = leftSide.whereType<Devil>().length;
+    int totalPriests = leftSide.whereType<Priest>().length;
+    if (totalDevils + totalPriests == 6) {
+      confettiController.play();
       endGame();
     }
   }
 
   void endGame() {
     endTime = DateTime.now();
-    // leftSide.clear();
-    // rightSide.clear();
-    // onBoat.clear();
-    // leftSide.insert(0, Devil());
-    // rightSide.insert(0, Devil());
-    // onBoat.insert(0, Devil());
-    alignment = Alignment.bottomCenter;
     update();
   }
 
