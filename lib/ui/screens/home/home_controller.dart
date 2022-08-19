@@ -66,12 +66,6 @@ class HomeController extends GetxController {
         colorText: Colors.white,
         borderRadius: 10,
       );
-      //force win
-      onBoat.insert(0, rightSide.first);
-      rightSide.removeAt(0);
-      leftSide.addAll(rightSide);
-      rightSide.clear();
-      update();
       return;
     }
     disableInteraction = true;
