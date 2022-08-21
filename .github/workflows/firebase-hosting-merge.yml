@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Decode base64 secrets
-        run: echo FIREBASE_OPTIONS | base64 -d > lib/firebase_options.dart
-        with:
+        run: echo FIREBASE_OPTIONS | base64 -Dd > lib/firebase_options.dart
+        env:
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
 
       - name: Setup Flutter
