@@ -7,7 +7,7 @@ class Devil extends Subject {
   String toString() => 'Devil';
 
   @override
-  String get image => 'assets/images/devil.png';
+  String get image => 'assets/images/devil2.png';
 }
 
 class Priest extends Subject {
@@ -15,5 +15,5 @@ class Priest extends Subject {
   String toString() => 'Priest';
 
   @override
-  String get image => 'assets/images/priest.png';
+  String get image => 'assets/images/priest2.png';
 }

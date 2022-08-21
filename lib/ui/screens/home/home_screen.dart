@@ -33,9 +33,9 @@ class HomeScreen extends StatelessWidget {
           subjectWidth = snapshot.maxHeight / 24;
         }
         double subjectHeight = (16 * subjectWidth) / 9;
-        double boatWidth = subjectWidth * 3;
-        double boatHeight = subjectHeight * 2;
-        double boatPadding = subjectWidth * 0.6;
+        double boatWidth = subjectWidth * 3.5;
+        double boatHeight = subjectHeight / 2;
+        double boatPadding = subjectWidth * 0.3;
 
         developer.log(
           'maxWidth ${snapshot.maxWidth}',
@@ -70,6 +70,7 @@ class HomeScreen extends StatelessWidget {
               return Scaffold(
                 backgroundColor: Colors.blue.shade300,
                 body: Stack(
+                  clipBehavior: Clip.none,
                   children: [
                     PlayGroundWidget(
                       subjectWidth: subjectWidth,
@@ -88,6 +89,7 @@ class HomeScreen extends StatelessWidget {
                             .toList(),
                       ),
                       centerWidget: Stack(
+                        clipBehavior: Clip.none,
                         children: [
                           BoatWidget(
                             boatWidth: boatWidth,
@@ -122,11 +124,8 @@ class HomeScreen extends StatelessWidget {
                             )
                             .toList(),
                       ),
-                      bottomLeftSideWidget: _buildMoveBoatButton(
-                        controller.moveBoat,
-                      ),
                       bottomRightSideWidget: _buildMoveBoatButton(
-                        controller.moveBoat,
+                        controller,
                       ),
                       bottomCenterWidget: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                               stream: controller.gameStream,
                               builder: (context, snapshot) {
                                 return Text(
-                                  controller.playingTime(),
+                                  controller.getScore(),
                                   style: const TextStyle(
                                     fontSize: 50,
                                     color: Colors.white,
@@ -147,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           if (controller.isGameEnded)
                             Text(
-                              controller.gameTime(),
+                              controller.getFinalScore(),
                               style: const TextStyle(
                                 fontSize: 50,
                                 color: Colors.white,
@@ -181,16 +180,22 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMoveBoatButton(Function moveBoat) {
+  Widget _buildMoveBoatButton(HomeController controller) {
     return Center(
       child: NeoPopTiltedButton(
-        onTapUp: () => moveBoat(),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 80.0,
+        onTapUp: () => controller.moveBoat(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 50.0,
             vertical: 15,
           ),
-          child: Text('Move boat'),
+          child: Icon(
+            controller.isBoatOnLeftSide
+                ? Icons.arrow_forward
+                : Icons.arrow_back,
+            size: 50,
+            color: Colors.amber,
+          ),
         ),
       ),
     );
@@ -206,12 +211,14 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           const Center(
-            child: Text(
-              problemStatement,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30,
-                color: Colors.white,
+            child: FittedBox(
+              child: Text(
+                problemStatement,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -311,7 +318,7 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Time taken ${controller.gameTime()}',
+              'Time taken ${controller.getFinalScore()}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 30,

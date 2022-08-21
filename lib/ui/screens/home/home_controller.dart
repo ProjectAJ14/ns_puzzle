@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   bool disableInteraction = false;
 
   DateTime? startTime;
+
   DateTime? endTime;
 
   bool get isGameStarted => startTime != null;
@@ -137,20 +138,22 @@ class HomeController extends GetxController {
     checkWin();
   }
 
-  String playingTime() {
+  String getScore() {
     if (startTime == null) {
-      return '00:00:00:000';
+      return '';
     }
-    return DateTime.now()
-        .difference(startTime!)
-        .toHoursMinutesSecondsMilliseconds();
+    final duration = DateTime.now().difference(startTime!);
+    int score = 100 - duration.inSeconds;
+    return score.toTwoDigits();
   }
 
-  String gameTime() {
+  String getFinalScore() {
     if (endTime == null) {
-      return '00:00:00:000';
+      return getScore();
     }
-    return endTime!.difference(startTime!).toHoursMinutesSecondsMilliseconds();
+    final duration = endTime!.difference(startTime!);
+    int score = 100 - duration.inSeconds;
+    return score.toTwoDigits();
   }
 
   void checkGameEnd() {
@@ -183,8 +186,9 @@ class HomeController extends GetxController {
     int totalDevils = leftSide.whereType<Devil>().length;
     int totalPriests = leftSide.whereType<Priest>().length;
     if (totalDevils + totalPriests == 6) {
+      endTime = DateTime.now();
+      update();
       confettiController.play();
-      endGame();
     }
   }
 

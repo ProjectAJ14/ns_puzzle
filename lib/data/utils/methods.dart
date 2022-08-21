@@ -40,37 +40,40 @@ extension DurationExtensions on Duration {
   /// Converts the duration into a readable string
   /// 05:15
   String toHoursMinutes() {
-    String twoDigitMinutes = _toTwoDigits(inMinutes.remainder(60));
-    return "${_toTwoDigits(inHours)}:$twoDigitMinutes";
+    String twoDigitMinutes = inMinutes.remainder(60).toTwoDigits();
+    return "${inHours.toTwoDigits()}:$twoDigitMinutes";
   }
 
   /// Converts the duration into a readable string
   /// 05:15:35
   String toHoursMinutesSeconds() {
-    String twoDigitMinutes = _toTwoDigits(inMinutes.remainder(60));
-    String twoDigitSeconds = _toTwoDigits(inSeconds.remainder(60));
-    return "${_toTwoDigits(inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+    String twoDigitMinutes = inMinutes.remainder(60).toTwoDigits();
+    String twoDigitSeconds = inSeconds.remainder(60).toTwoDigits();
+    return "${inHours.toTwoDigits()}:$twoDigitMinutes:$twoDigitSeconds";
   }
 
   /// Converts the duration into a readable string
   /// 05:15:35:000
   String toHoursMinutesSecondsMilliseconds() {
-    String twoDigitMinutes = _toTwoDigits(inMinutes.remainder(60));
-    String twoDigitSeconds = _toTwoDigits(inSeconds.remainder(60));
+    String twoDigitMinutes = inMinutes.remainder(60).toTwoDigits();
+    String twoDigitSeconds = inSeconds.remainder(60).toTwoDigits();
     String threeDigitMilliseconds =
-        _toThreeDigits(inMilliseconds.remainder(1000));
-    return "${_toTwoDigits(inHours)}:$twoDigitMinutes:$twoDigitSeconds"
+        inMilliseconds.remainder(1000).toThreeDigits();
+    return "${inHours.toTwoDigits()}:$twoDigitMinutes:$twoDigitSeconds"
         ":$threeDigitMilliseconds";
   }
+}
 
-  String _toTwoDigits(int n) {
-    if (n >= 10) return "$n";
-    return "0$n";
+// An extension on int that returns a string in the format of 00
+extension IntExtensions on int {
+  String toTwoDigits() {
+    if (this >= 10) return "$this";
+    return "0$this";
   }
 
-  String _toThreeDigits(int n) {
-    if (n >= 100) return "$n";
-    if (n >= 10) return "0$n";
-    return "00$n";
+  String toThreeDigits() {
+    if (this >= 100) return "$this";
+    if (this >= 10) return "0$this";
+    return "00$this";
   }
 }

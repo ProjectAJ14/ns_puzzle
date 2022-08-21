@@ -25,29 +25,38 @@ class BoatWidget extends StatelessWidget {
     return AnimatedAlign(
       alignment: alignment,
       curve: Curves.easeInOut,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(milliseconds: 1500),
       child: SizedBox(
-        height: boatHeight,
         width: boatWidth,
         child: Stack(
           alignment: Alignment.bottomCenter,
+          clipBehavior: Clip.none,
           children: [
-            Transform(
-              alignment: Alignment.center,
-              transform: isBoatOnLeftSide
-                  ? Matrix4.rotationY(0)
-                  : Matrix4.rotationY(math.pi), //Mirror Widget
-              child: Image.asset(
-                'assets/images/boat.png',
-                fit: BoxFit.fill,
+            Positioned(
+              bottom: -10,
+              child: Transform(
+                alignment: Alignment.center,
+                transform: isBoatOnLeftSide
+                    ? Matrix4.rotationY(0)
+                    : Matrix4.rotationY(math.pi), //Mirror Widget
+                child: Image.asset(
+                  'assets/images/boat3.png',
+                  fit: BoxFit.fill,
+                  height: boatHeight,
+                  width: boatWidth,
+                ),
               ),
             ),
             Positioned(
               bottom: boatPadding,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: children,
+              child: SizedBox(
+                // width: boatWidth - boatWidth / 3,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: children,
+                ),
               ),
             ),
           ],
