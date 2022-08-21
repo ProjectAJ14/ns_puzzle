@@ -16,7 +16,7 @@ jobs:
 
       - name: Decode base64 secrets
         run: echo FIREBASE_OPTIONS | base64 -d > lib/firebase_options.dart
-        env:
+        with:
           FIREBASE_OPTIONS: ${{ secrets.FIREBASE_OPTIONS }}
 
       - name: Setup Flutter
