@@ -20,8 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> redirectUser() async {
-    Get.offNamed(RouteConstants.home);
-    return;
     if (auth.isAuthenticated) {
       Get.offNamed(RouteConstants.home);
     } else {
