@@ -27,6 +27,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   neopop: ^1.0.2
   confetti: ^0.7.0
+  flutter_animate: ^1.0.0
 
 dev_dependencies:
   flutter_test:

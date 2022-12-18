@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as developer;
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 import '../../../data/models/subjects.dart';
 import '../../../data/utils/methods.dart';
 import '../../routes/route_constants.dart';
+
+const int totalScore = 100;
 
 class HomeController extends GetxController {
   AlignmentGeometry alignment = Alignment.bottomRight;
@@ -31,19 +34,38 @@ class HomeController extends GetxController {
 
   bool get isWinner => isGameEnded && leftSide.length == 6;
 
+  String endGameReason = '';
+
   ConfettiController confettiController =
       ConfettiController(duration: const Duration(seconds: 10));
+
+  Stream<int> gameStream = Stream.periodic(
+    const Duration(milliseconds: 1),
+    (index) => index,
+  ).asBroadcastStream();
+
+  @override
+  void onInit() {
+    super.onInit();
+    gameStream.listen(_gameListener);
+  }
+
+  void _gameListener(event) {
+    int score = _calculateScore();
+    if (score <= 0 && !isGameEnded && isGameStarted) {
+      endGame(
+        reason: 'You ran out of time!',
+      );
+    } else {
+      developer.log("score: $score");
+    }
+  }
 
   @override
   void onClose() {
     confettiController.dispose();
     super.onClose();
   }
-
-  Stream<int> gameStream = Stream.periodic(
-    const Duration(milliseconds: 1),
-    (index) => index,
-  );
 
   List<Subject> leftSide = [];
   List<Subject> rightSide = [
@@ -139,21 +161,22 @@ class HomeController extends GetxController {
   }
 
   String getScore() {
-    if (startTime == null) {
-      return '';
-    }
-    final duration = DateTime.now().difference(startTime!);
-    int score = 100 - duration.inSeconds;
+    int score = _calculateScore();
     return score.toTwoDigits();
   }
 
-  String getFinalScore() {
-    if (endTime == null) {
-      return getScore();
+  int _calculateScore() {
+    if (startTime == null) {
+      return 0;
     }
-    final duration = endTime!.difference(startTime!);
-    int score = 100 - duration.inSeconds;
-    return score.toTwoDigits();
+    Duration duration;
+    if (endTime == null) {
+      duration = DateTime.now().difference(startTime!);
+    } else {
+      duration = endTime!.difference(startTime!);
+    }
+    int score = totalScore - duration.inSeconds;
+    return score;
   }
 
   void checkGameEnd() {
@@ -165,7 +188,13 @@ class HomeController extends GetxController {
     int totalDevils = rightList.whereType<Devil>().length;
     int totalPriests = rightList.whereType<Priest>().length;
     if (totalDevils > totalPriests && totalPriests > 0) {
-      endGame();
+      //Mark all priest as dead
+      rightList.whereType<Priest>().forEach((element) {
+        element.markDead();
+      });
+      endGame(
+        reason: 'Devils ate the priests on the right side',
+      );
       return;
     }
     // Check if devils are more than priests on left side including the boat
@@ -176,7 +205,14 @@ class HomeController extends GetxController {
     totalDevils = leftList.whereType<Devil>().length;
     totalPriests = leftList.whereType<Priest>().length;
     if (totalDevils > totalPriests && totalPriests > 0) {
-      endGame();
+      //Mark all priest as dead
+      leftList.whereType<Priest>().forEach((element) {
+        element.markDead();
+      });
+
+      endGame(
+        reason: 'Devils ate the priests on the left side',
+      );
       return;
     }
   }
@@ -192,7 +228,8 @@ class HomeController extends GetxController {
     }
   }
 
-  void endGame() {
+  void endGame({required String reason}) {
+    endGameReason = reason;
     endTime = DateTime.now();
     update();
   }

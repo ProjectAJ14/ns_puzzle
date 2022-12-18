@@ -14,11 +14,11 @@ void main() {
 
   //Test: Devil image
   test('Devil image', () {
-    expect(Devil().image, 'assets/images/devil2.png');
+    expect(Devil().image, 'assets/images/devil.png');
   });
 
 // Test: Priest image
   test('Priest image', () {
-    expect(Priest().image, 'assets/images/priest2.png');
+    expect(Priest().image, 'assets/images/priest.png');
   });
 }

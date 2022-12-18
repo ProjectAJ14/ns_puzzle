@@ -146,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           if (controller.isGameEnded)
                             Text(
-                              controller.getFinalScore(),
+                              controller.getScore(),
                               style: const TextStyle(
                                 fontSize: 50,
                                 color: Colors.white,
@@ -167,6 +167,7 @@ class HomeScreen extends StatelessWidget {
                     if (controller.isGameEnded && !controller.isWinner)
                       ..._buildEndGameWidgets(
                         controller.resetGame,
+                        controller.endGameReason,
                       ),
                     if (controller.isGameEnded && controller.isWinner)
                       ..._buildWinnerWidgets(controller),
@@ -243,11 +244,14 @@ class HomeScreen extends StatelessWidget {
     ];
   }
 
-  List<Widget> _buildEndGameWidgets(resetGame) {
+  List<Widget> _buildEndGameWidgets(
+    VoidCallback resetGame,
+    String endGameReason,
+  ) {
     return [
       ModalBarrier(
         dismissible: false,
-        color: Colors.red.withOpacity(0.9),
+        color: Colors.red.withOpacity(0.3),
       ),
       Center(
         child: Column(
@@ -260,6 +264,15 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 50,
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              endGameReason,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+                fontWeight: FontWeight.w100,
               ),
             ),
             const SizedBox(
@@ -318,7 +331,7 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Time taken ${controller.getFinalScore()}',
+              'Score :  ${controller.getScore()}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 30,

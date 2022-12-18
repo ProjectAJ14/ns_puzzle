@@ -40,7 +40,7 @@ class BoatWidget extends StatelessWidget {
                     ? Matrix4.rotationY(0)
                     : Matrix4.rotationY(math.pi), //Mirror Widget
                 child: Image.asset(
-                  'assets/images/boat3.png',
+                  'assets/images/boat.png',
                   fit: BoxFit.fill,
                   height: boatHeight,
                   width: boatWidth,
