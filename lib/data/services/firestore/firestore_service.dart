@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ns_utils/extensions/map.dart';
 
+import '../../../ui/utils/app_loader.dart';
 import '../../../ui/utils/constant.dart';
 import '../../models/app_response.dart';
 import '../../models/user.dart';
@@ -27,10 +28,13 @@ class FireStoreService {
 
   Future<AppResponse> getAllTopScoredUsers() async {
     try {
+      AppLoader.show();
       QuerySnapshot querySnapshot = await users.get();
       List<User> userList = [];
+      List<User> top10UserList = [];
       for (var doc in querySnapshot.docs) {
         final data = doc.data() as Map<String, dynamic>;
+
         userList.add(
           User(
             displayName: data.getString(Constants.displayName),
@@ -42,9 +46,14 @@ class FireStoreService {
       userList.sort((user1, user2) {
         return user2.score.compareTo(user1.score);
       });
+      for (int i = 0; i < userList.length; i++) {
+        if (i <= 9) {
+          top10UserList.add(userList[i]);
+        }
+      }
       return AppResponse.success(
         id: 'getAllTopScoredUsers',
-        data: {Constants.userList: userList},
+        data: {Constants.userList: top10UserList},
       );
     } catch (e, s) {
       return AppResponse.error(
@@ -52,6 +61,8 @@ class FireStoreService {
         error: e,
         stackTrace: s,
       );
+    } finally {
+      AppLoader.hide();
     }
   }
 }

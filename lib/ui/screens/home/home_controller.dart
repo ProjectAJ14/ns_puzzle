@@ -26,8 +26,6 @@ class HomeController extends GetxController {
   bool get isBoatNotFull => !isBoatFull;
 
   bool disableInteraction = false;
-  bool leaderBoardClicked = false;
-  bool get isLeaderBoardClicked => isWinner && leaderBoardClicked;
 
   DateTime? startTime;
 
@@ -182,8 +180,8 @@ class HomeController extends GetxController {
     return score.toTwoDigits();
   }
 
-  void leaderBoardClick(bool value) {
-    leaderBoardClicked = value;
+  void leaderBoardClick() {
+    Get.toNamed(RouteConstants.topUsers);
   }
 
   int _calculateScore() {
