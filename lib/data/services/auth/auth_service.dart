@@ -3,6 +3,7 @@ import 'dart:developer' as developer;
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'sp_service.dart';
 
 import '../../../ui/screens/sign_in/sign_in_screen.dart';
 import '../../../ui/utils/app_loader.dart';
@@ -18,8 +19,10 @@ class AuthService {
 
   bool get isAuthenticated => _firebaseAuth.currentUser != null;
 
-  String get userName =>
+  String get userEmail =>
       isAuthenticated ? _firebaseAuth.currentUser!.email ?? '' : '';
+  String get userName =>
+      isAuthenticated ? _firebaseAuth.currentUser!.displayName ?? '' : '';
 
   Future<AppResponse> signInWithGoogle() async {
     developer.log('signInWithGoogle');
@@ -68,6 +71,7 @@ class AuthService {
     try {
       AppLoader.show();
       await _firebaseAuth.signOut();
+      await SPService.clear();
       Get.offAll(() => const SignInScreen());
     } catch (error, stackTrace) {
       developer.log(

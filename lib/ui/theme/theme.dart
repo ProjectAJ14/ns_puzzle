@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 final theme = ThemeData(
   primarySwatch: Colors.green,
-  backgroundColor: const Color(0xFF202020),
+  colorScheme: ColorScheme.fromSwatch().copyWith(
+    background: const Color(0xFF202020),
+  ),
   scaffoldBackgroundColor: const Color(0xFF202020),
   appBarTheme: const AppBarTheme(
     color: Color(0xFF2E9D66),
@@ -32,47 +34,47 @@ final theme = ThemeData(
     ),
   ),
   textTheme: const TextTheme(
-    headline1: TextStyle(
+    displayLarge: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    headline2: TextStyle(
+    displayMedium: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    headline3: TextStyle(
+    displaySmall: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    headline4: TextStyle(
+    headlineMedium: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    headline5: TextStyle(
+    headlineSmall: TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       fontSize: 10,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.normal,
       color: Colors.white,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       fontSize: 12,
       fontWeight: FontWeight.normal,
       color: Colors.white,
     ),
-    button: TextStyle(
+    labelLarge: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.bold,
       color: Colors.white,

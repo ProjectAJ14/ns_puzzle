@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'data/services/auth/auth_service.dart';
 import 'data/services/auth/sp_service.dart';
+import 'data/services/firestore/firestore_service.dart';
 import 'firebase_options.dart';
 import 'ui/routes/route_constants.dart';
 import 'ui/routes/routes.dart';
@@ -19,6 +20,7 @@ void main() async {
   await AppLoader.init();
   await SPService.init();
   Get.put(AuthService());
+  Get.put(FireStoreService());
   runApp(const MyApp());
 }
 

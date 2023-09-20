@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/models/subjects.dart';
+import '../../../data/models/user.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../../data/services/firestore/firestore_service.dart';
 import '../../../data/utils/methods.dart';
 import '../../routes/route_constants.dart';
 
@@ -23,6 +26,8 @@ class HomeController extends GetxController {
   bool get isBoatNotFull => !isBoatFull;
 
   bool disableInteraction = false;
+  bool leaderBoardClicked = false;
+  bool get isLeaderBoardClicked => isWinner && leaderBoardClicked;
 
   DateTime? startTime;
 
@@ -163,6 +168,22 @@ class HomeController extends GetxController {
   String getScore() {
     int score = _calculateScore();
     return score.toTwoDigits();
+  }
+
+  String userWonGetScore() {
+    int score = _calculateScore();
+    fireStore.addUser(
+      user: User(
+        displayName: auth.userName,
+        score: score,
+        email: auth.userEmail,
+      ),
+    );
+    return score.toTwoDigits();
+  }
+
+  void leaderBoardClick(bool value) {
+    leaderBoardClicked = value;
   }
 
   int _calculateScore() {

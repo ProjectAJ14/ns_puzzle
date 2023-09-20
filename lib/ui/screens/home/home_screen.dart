@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neopop/neopop.dart';
 
+import '../../../data/models/app_response.dart';
+import '../../../data/models/user.dart';
+import '../../../data/services/auth/auth_service.dart';
+import '../../../data/services/firestore/firestore_service.dart';
+import '../../utils/constant.dart';
 import 'home_controller.dart';
 import 'widgets/boat_widget.dart';
 import 'widgets/play_ground_widget.dart';
@@ -161,9 +166,7 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                     if (!controller.isGameStarted)
-                      ..._buildStartGameWidgets(
-                        controller.startGame,
-                      ),
+                      ..._buildStartGameWidgets(controller.startGame),
                     if (controller.isGameEnded && !controller.isWinner)
                       ..._buildEndGameWidgets(
                         controller.resetGame,
@@ -171,6 +174,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     if (controller.isGameEnded && controller.isWinner)
                       ..._buildWinnerWidgets(controller),
+                    if (controller.isLeaderBoardClicked)
+                      ..._buildLeaderBoardWidgets(controller),
                   ],
                 ),
               );
@@ -211,6 +216,25 @@ class HomeScreen extends StatelessWidget {
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: NeoPopTiltedButton(
+              onTapUp: () => auth.signOut(),
+
+              // onTapUp: () => controller.moveBoat(),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 10,
+                ),
+                child: Icon(
+                  Icons.logout_outlined,
+                  size: 28,
+                  color: Colors.amber,
+                ),
+              ),
+            ),
+          ),
           const Center(
             child: FittedBox(
               child: Text(
@@ -331,7 +355,7 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Score :  ${controller.getScore()}',
+              'Score :  ${controller.userWonGetScore()}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 30,
@@ -376,7 +400,7 @@ class HomeScreen extends StatelessWidget {
             ),
             NeoPopTiltedButton(
               color: Colors.orange,
-              onTapUp: () {},
+              onTapUp: () => controller.leaderBoardClick(true),
               child: const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 80.0,
@@ -386,6 +410,48 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      )
+    ];
+  }
+
+  List<Widget> _buildLeaderBoardWidgets(
+    HomeController controller,
+  ) {
+    return [
+      ModalBarrier(
+        dismissible: false,
+        color: Colors.green.withOpacity(0.8),
+      ),
+      Center(
+        child: FutureBuilder(
+          future: fireStore.getAllTopScoredUsers(),
+          builder: (ctx, snapshot) {
+            // Checking if future is resolved
+            if (snapshot.connectionState == ConnectionState.done) {
+              // If we got an error
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    '${snapshot.error} occurred',
+                  ),
+                );
+
+                // if we got our data
+              } else if (snapshot.hasData) {
+                // Extracting data from snapshot object
+                final appResponse = snapshot.data as AppResponse;
+                if (appResponse.isSuccess) {
+                  List<User> userList =
+                      appResponse.data[Constants.userList] as List<User>;
+                  return Text(userList.length.toString());
+                } else {
+                  return Text(appResponse.message);
+                }
+              }
+            }
+            return const SizedBox.shrink();
+          },
         ),
       )
     ];

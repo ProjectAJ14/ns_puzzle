@@ -12,16 +12,16 @@ infoDialog({
       title: Text(
         title,
         style: isLightTheme
-            ? Get.theme.textTheme.headline5
-            : Get.theme.primaryTextTheme.headline5,
+            ? Get.theme.textTheme.headlineSmall
+            : Get.theme.primaryTextTheme.headlineSmall,
       ),
       content: Text(
         message,
         style: isLightTheme
-            ? Get.theme.textTheme.bodyText1!.copyWith(
+            ? Get.theme.textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w400,
               )
-            : Get.theme.primaryTextTheme.bodyText1!.copyWith(
+            : Get.theme.primaryTextTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w400,
               ),
       ),
@@ -31,8 +31,9 @@ infoDialog({
           child: const Text('OK'),
         ),
       ],
-      backgroundColor:
-          isLightTheme ? Get.theme.highlightColor : Get.theme.backgroundColor,
+      backgroundColor: isLightTheme
+          ? Get.theme.highlightColor
+          : Get.theme.colorScheme.background,
     ),
   );
 }

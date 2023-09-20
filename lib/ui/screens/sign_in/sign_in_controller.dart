@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../data/models/app_response.dart';
 import '../../../data/services/auth/auth_service.dart';
+import '../../../data/services/auth/sp_service.dart';
 import '../../routes/route_constants.dart';
 import '../../utils/app_loader.dart';
 import '../../utils/info_alert.dart';
@@ -15,6 +16,7 @@ class SignInController extends GetxController {
       AppLoader.show();
       AppResponse appResponse = await auth.signInWithGoogle();
       if (appResponse.isSuccess) {
+        await SPService.setAuthenticated(true);
         Get.offAllNamed(RouteConstants.home);
       } else {
         errorDialog(appResponse.message);
