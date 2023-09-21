@@ -5,7 +5,6 @@ import 'dart:developer' as developer;
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'sp_service.dart';
 import '../../../ui/screens/sign_in/sign_in_screen.dart';
 import '../../../ui/utils/app_loader.dart';
 
