@@ -20,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> redirectUser() async {
-    //bool isAuthenticated = await SPService.isAuthenticated();
     if (authService.isAuthenticated) {
       Get.offNamed(RouteConstants.home);
     } else {

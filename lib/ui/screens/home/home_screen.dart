@@ -188,9 +188,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                     if (controller.isGameEnded && controller.isWinner)
                       ..._buildWinnerWidgets(controller),
-                    /* if (controller.isGameEnded &&
-                        controller.isLeaderBoardClicked)
-                      ..._buildLeaderBoardWidgets(controller),*/
                   ],
                 ),
               );
