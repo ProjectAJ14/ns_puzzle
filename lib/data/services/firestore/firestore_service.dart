@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ns_utils/extensions/map.dart';
 
 import '../../../ui/utils/app_loader.dart';
 import '../../../ui/utils/constant.dart';
@@ -17,8 +16,9 @@ class FireStoreService {
   }) {
     // Call the user's CollectionReference to add a new user
     users
-        .doc(user.email)
+        .doc(user.userId)
         .set({
+          Constants.email: user.email,
           Constants.displayName: user.displayName,
           Constants.score: user.score,
         })
@@ -29,31 +29,22 @@ class FireStoreService {
   Future<AppResponse> getAllTopScoredUsers() async {
     try {
       AppLoader.show();
-      QuerySnapshot querySnapshot = await users.get();
-      List<User> userList = [];
-      List<User> top10UserList = [];
-      for (var doc in querySnapshot.docs) {
-        final data = doc.data() as Map<String, dynamic>;
+      List<User> userList = await users
+          //.where(Constants.score, isGreaterThan: 40)
+          .orderBy(Constants.score, descending: true)
+          .limit(10)
+          .get()
+          .then(
+            (value) => value.docs
+                .map(
+                  (e) => User.fromFireStore(e.data() as Map<String, dynamic>),
+                )
+                .toList(),
+          );
 
-        userList.add(
-          User(
-            displayName: data.getString(Constants.displayName),
-            email: doc.id,
-            score: data.getInt(Constants.score),
-          ),
-        );
-      }
-      userList.sort((user1, user2) {
-        return user2.score.compareTo(user1.score);
-      });
-      for (int i = 0; i < userList.length; i++) {
-        if (i <= 9) {
-          top10UserList.add(userList[i]);
-        }
-      }
       return AppResponse.success(
         id: 'getAllTopScoredUsers',
-        data: {Constants.userList: top10UserList},
+        data: {Constants.userList: userList},
       );
     } catch (e, s) {
       return AppResponse.error(

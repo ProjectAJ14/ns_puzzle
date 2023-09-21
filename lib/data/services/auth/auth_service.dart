@@ -18,6 +18,7 @@ class AuthService {
   final _googleSignIn = GoogleSignIn();
 
   bool get isAuthenticated => _firebaseAuth.currentUser != null;
+  String get userId => isAuthenticated ? _firebaseAuth.currentUser!.uid : '';
 
   String get userEmail =>
       isAuthenticated ? _firebaseAuth.currentUser!.email ?? '' : '';

@@ -4,4 +4,5 @@ class Constants {
   static const score = "score";
   static const isAuthenticated = "isAuthenticated";
   static const userList = "user_list";
+  static const userId = "userId";
 }

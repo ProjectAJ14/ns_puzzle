@@ -172,6 +172,7 @@ class HomeController extends GetxController {
     int score = _calculateScore();
     fireStore.addUser(
       user: User(
+        userId: auth.userId,
         displayName: auth.userName,
         score: score,
         email: auth.userEmail,
