@@ -1,4 +1,5 @@
 import '../../../data/models/app_response.dart';
+import '../../../ui/utils/constant.dart';
 import 'auth_service.dart';
 import 'dart:developer' as developer;
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -61,7 +62,7 @@ class AuthServiceImpl extends AuthService {
 
     return AppResponse.error(
       id: 'signInWithGoogle',
-      message: noCredentialsWereFound,
+      message: Constants.noCredentialsWereFound,
     );
   }
 
