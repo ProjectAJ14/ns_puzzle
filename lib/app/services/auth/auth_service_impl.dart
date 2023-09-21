@@ -71,7 +71,6 @@ class AuthServiceImpl extends AuthService {
     try {
       AppLoader.show();
       await _firebaseAuth.signOut();
-      await SPService.clear();
       Get.offAll(() => const SignInScreen());
     } catch (error, stackTrace) {
       developer.log(
