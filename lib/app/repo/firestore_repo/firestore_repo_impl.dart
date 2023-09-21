@@ -1,16 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import '../../../ui/utils/app_loader.dart';
 import '../../../ui/utils/constant.dart';
-import '../../models/app_response.dart';
-import '../../models/user.dart';
+import '../../../data/models/app_response.dart';
+import '../../../data/models/user.dart';
+import 'firestore_repo.dart';
 
-FireStoreService get fireStore => Get.find<FireStoreService>();
-
-class FireStoreService {
+class FireStoreRepoImpl extends FireStoreRepo {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  @override
   addUser({
     required User user,
   }) {
@@ -26,6 +24,7 @@ class FireStoreService {
         .catchError((error) => debugPrint('Error adding user $error'));
   }
 
+  @override
   Future<AppResponse> getAllTopScoredUsers() async {
     try {
       AppLoader.show();

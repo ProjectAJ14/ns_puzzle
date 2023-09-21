@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/services/auth/auth_service.dart';
+import '../../../app/services/services.dart';
 import '../../routes/route_constants.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> redirectUser() async {
     //bool isAuthenticated = await SPService.isAuthenticated();
-    if (auth.isAuthenticated) {
+    if (authService.isAuthenticated) {
       Get.offNamed(RouteConstants.home);
     } else {
       Get.offNamed(RouteConstants.signIn);

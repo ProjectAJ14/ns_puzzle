@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neopop/neopop.dart';
 
-import '../../../data/services/auth/auth_service.dart';
+import '../../../app/services/services.dart';
 import 'home_controller.dart';
 import 'widgets/boat_widget.dart';
 import 'widgets/play_ground_widget.dart';
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.topRight,
                       child: NeoPopTiltedButton(
-                        onTapUp: () => auth.signOut(),
+                        onTapUp: () => authService.signOut(),
                         child: const Padding(
                           padding: EdgeInsets.symmetric(
                             horizontal: 25,
