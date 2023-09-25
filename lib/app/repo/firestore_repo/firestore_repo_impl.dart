@@ -13,15 +13,11 @@ class FireStoreRepoImpl extends FireStoreRepo {
     required User user,
   }) {
     // Call the user's CollectionReference to add a new user
-    users
-        .doc(user.userId)
-        .set({
-          Constants.email: user.email,
-          Constants.displayName: user.displayName,
-          Constants.score: user.score,
-        })
-        .then((value) => debugPrint("User added successfully!"))
-        .catchError((error) => debugPrint('Error adding user $error'));
+    users.doc(user.userId).set({
+      Constants.email: user.email,
+      Constants.displayName: user.displayName,
+      Constants.score: user.score,
+    }).catchError((error) => debugPrint('Error adding user $error'));
   }
 
   @override
