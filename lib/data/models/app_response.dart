@@ -1,6 +1,6 @@
 import 'dart:developer' as developer;
 
-import '../utils/methods.dart';
+import '../../ui/utils/methods.dart';
 
 /// Custom status code for the app.
 enum AppStatusCode {

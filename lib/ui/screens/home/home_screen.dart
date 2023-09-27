@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:neopop/neopop.dart';
 
+import '../../../app/services/services.dart';
 import 'home_controller.dart';
 import 'widgets/boat_widget.dart';
 import 'widgets/play_ground_widget.dart';
@@ -72,6 +73,23 @@ class HomeScreen extends StatelessWidget {
                 body: Stack(
                   clipBehavior: Clip.none,
                   children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: NeoPopTiltedButton(
+                        onTapUp: () => authService.signOut(),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 25,
+                            vertical: 10,
+                          ),
+                          child: Icon(
+                            Icons.logout_outlined,
+                            size: 28,
+                            color: Colors.amber,
+                          ),
+                        ),
+                      ),
+                    ),
                     PlayGroundWidget(
                       subjectWidth: subjectWidth,
                       leftSideWidget: Row(
@@ -161,13 +179,12 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                     if (!controller.isGameStarted)
-                      ..._buildStartGameWidgets(
-                        controller.startGame,
-                      ),
+                      ..._buildStartGameWidgets(controller.startGame),
                     if (controller.isGameEnded && !controller.isWinner)
                       ..._buildEndGameWidgets(
                         controller.resetGame,
                         controller.endGameReason,
+                        controller.leaderBoardClick,
                       ),
                     if (controller.isGameEnded && controller.isWinner)
                       ..._buildWinnerWidgets(controller),
@@ -247,6 +264,7 @@ class HomeScreen extends StatelessWidget {
   List<Widget> _buildEndGameWidgets(
     VoidCallback resetGame,
     String endGameReason,
+    VoidCallback leaderBoardClick,
   ) {
     return [
       ModalBarrier(
@@ -291,7 +309,7 @@ class HomeScreen extends StatelessWidget {
             ),
             NeoPopTiltedButton(
               color: Colors.orange,
-              onTapUp: () {},
+              onTapUp: () => leaderBoardClick(),
               child: const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 80.0,
@@ -331,7 +349,7 @@ class HomeScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Score :  ${controller.getScore()}',
+              'Score :  ${controller.userWonGetScore()}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 30,
@@ -376,7 +394,7 @@ class HomeScreen extends StatelessWidget {
             ),
             NeoPopTiltedButton(
               color: Colors.orange,
-              onTapUp: () {},
+              onTapUp: () => controller.leaderBoardClick(),
               child: const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 80.0,

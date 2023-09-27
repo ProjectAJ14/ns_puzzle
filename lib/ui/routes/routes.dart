@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/sign_in/sign_in_screen.dart';
 import '../screens/splash/splash_screen.dart';
+import '../screens/top_users/top_users_screen.dart';
 import 'route_constants.dart';
 
 List<GetPage<dynamic>> appScreens() => [
@@ -17,5 +18,9 @@ List<GetPage<dynamic>> appScreens() => [
       GetPage(
         name: RouteConstants.home,
         page: () => const HomeScreen(),
+      ),
+      GetPage(
+        name: RouteConstants.topUsers,
+        page: () => const TopUserScreen(),
       ),
     ];

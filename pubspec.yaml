@@ -13,12 +13,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   flutter_easyloading: ^3.0.5
-  shared_preferences: ^2.0.15
   google_sign_in: ^5.3.3
+  
+
+ 
   ns_firebase_utils:
     git:
-      url: https://github.com/ajaykumargithub2114/ns_firebase_utils
-      ref: dev
+      url: https://github.com/ProjectAJ14/ns_firebase_utils
+      ref: master
 
   ns_utils:
     git:

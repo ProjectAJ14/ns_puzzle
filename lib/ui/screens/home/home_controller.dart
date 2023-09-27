@@ -5,8 +5,11 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../app/repo/repos.dart';
+import '../../../app/services/services.dart';
 import '../../../data/models/subjects.dart';
-import '../../../data/utils/methods.dart';
+import '../../../data/models/user.dart';
+import '../../utils/methods.dart';
 import '../../routes/route_constants.dart';
 
 const int totalScore = 100;
@@ -163,6 +166,23 @@ class HomeController extends GetxController {
   String getScore() {
     int score = _calculateScore();
     return score.toTwoDigits();
+  }
+
+  String userWonGetScore() {
+    int score = _calculateScore();
+    fireStoreRepo.addUser(
+      user: User(
+        userId: authService.userId,
+        displayName: authService.userName,
+        score: score,
+        email: authService.userEmail,
+      ),
+    );
+    return score.toTwoDigits();
+  }
+
+  void leaderBoardClick() {
+    Get.toNamed(RouteConstants.topUsers);
   }
 
   int _calculateScore() {
