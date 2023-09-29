@@ -34,7 +34,7 @@ class PlayGroundWidget extends StatelessWidget {
                   child: centerWidget,
                 ),
               ),
-              _buildSide(child: rightSideWidget)
+              _buildSide(child: rightSideWidget),
             ],
           ),
         ),
@@ -55,7 +55,7 @@ class PlayGroundWidget extends StatelessWidget {
               _buildSide(
                 color: Colors.brown,
                 child: bottomRightSideWidget,
-              )
+              ),
             ],
           ),
         ),

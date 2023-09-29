@@ -255,9 +255,9 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
-      )
+      ),
     ];
   }
 
@@ -320,7 +320,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      )
+      ),
     ];
   }
 
@@ -405,7 +405,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-      )
+      ),
     ];
   }
 }
