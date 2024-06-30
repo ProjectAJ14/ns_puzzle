@@ -7,7 +7,7 @@ class User {
   @JsonKey(defaultValue: '')
   final String userId;
 
-  @JsonKey(defaultValue: '', name:'display_name')
+  @JsonKey(defaultValue: '', name: 'display_name')
   final String displayName;
 
   @JsonKey(defaultValue: '')
