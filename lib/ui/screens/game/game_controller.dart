@@ -236,7 +236,7 @@ class GameController extends GetxController {
       user: User(
         userId: authService.userId,
         displayName: authService.userName,
-        score: _calculateScore(),
+        score: 0,
         email: authService.userEmail,
         image: authService.photoURL,
       ),
