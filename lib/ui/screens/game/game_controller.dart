@@ -12,7 +12,7 @@ import '../../../data/models/user.dart';
 import '../../utils/methods.dart';
 import '../../routes/route_constants.dart';
 
-const int totalScore = 100;
+const int totalScore = 1;
 
 class GameController extends GetxController {
   AlignmentGeometry alignment = Alignment.bottomRight;
@@ -151,19 +151,6 @@ class GameController extends GetxController {
     return score.toTwoDigits();
   }
 
-  String userWonGetScore() {
-    int score = _calculateScore();
-    fireStoreRepo.addUser(
-      user: User(
-        userId: authService.userId,
-        displayName: authService.userName,
-        score: score,
-        email: authService.userEmail,
-      ),
-    );
-    return score.toTwoDigits();
-  }
-
   void leaderBoardClick() {
     Get.toNamed(RouteConstants.leaderboard);
   }
@@ -232,10 +219,28 @@ class GameController extends GetxController {
       endTime = DateTime.now();
       update();
       confettiController.play();
+      fireStoreRepo.addUser(
+        user: User(
+          userId: authService.userId,
+          displayName: authService.userName,
+          score: _calculateScore(),
+          email: authService.userEmail,
+          image: authService.photoURL,
+        ),
+      );
     }
   }
 
   void endGame({required String reason}) {
+    fireStoreRepo.addUser(
+      user: User(
+        userId: authService.userId,
+        displayName: authService.userName,
+        score: _calculateScore(),
+        email: authService.userEmail,
+        image: authService.photoURL,
+      ),
+    );
     endGameReason = reason;
     endTime = DateTime.now();
     update();

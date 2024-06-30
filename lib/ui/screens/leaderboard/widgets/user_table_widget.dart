@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nes_ui/nes_ui.dart';
 
 import '../../../../data/models/user.dart';
 import 'text_cell.dart';
@@ -11,23 +10,24 @@ class UserTableWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NesWindow(
-      child: DataTable(
-        columns: const [
-          DataColumn(label: TextCell("Name", columnHeader: true)),
-          DataColumn(label: TextCell("Email", columnHeader: true)),
-          DataColumn(label: TextCell("Score", columnHeader: true)),
-        ],
-        rows: users.map((user) {
-          return DataRow(
-            cells: [
-              DataCell(TextCell(user.displayName, columnHeader: false)),
-              DataCell(TextCell(user.email, columnHeader: false)),
-              DataCell(TextCell(user.score.toString(), columnHeader: false)),
-            ],
-          );
-        }).toList(),
-      ),
+    return DataTable(
+      columnSpacing: 8,
+      columns: const [
+        DataColumn(label: TextCell("Rank", isHeader: true)),
+        DataColumn(label: TextCell("Name", isHeader: true)),
+        DataColumn(label: TextCell("Email", isHeader: true)),
+        DataColumn(label: TextCell("Score", isHeader: true)),
+      ],
+      rows: users.map((user) {
+        return DataRow(
+          cells: [
+            DataCell(TextCell('${users.indexOf(user) + 1}', isHeader: false)),
+            DataCell(TextCell(user.displayName, isHeader: false)),
+            DataCell(TextCell(user.email, isHeader: false)),
+            DataCell(TextCell(user.score.toString(), isHeader: false)),
+          ],
+        );
+      }).toList(),
     );
   }
 }

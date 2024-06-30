@@ -315,9 +315,7 @@ class GameScreen extends StatelessWidget {
                 child: Text('Reset Game'),
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
+            const SizedBox(height: 10),
             NesButton(
               type: NesButtonType.normal,
               onPressed: () => leaderBoardClick(),
@@ -360,7 +358,7 @@ class GameScreen extends StatelessWidget {
               height: 10,
             ),
             Text(
-              'Score :  ${controller.userWonGetScore()}',
+              'Score :  ${controller.getScore()}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 30,
@@ -403,9 +401,7 @@ class GameScreen extends StatelessWidget {
                 child: Text('Play Again'),
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
+            const SizedBox(height: 10),
             NesButton(
               type: NesButtonType.normal,
               onPressed: () => controller.leaderBoardClick(),

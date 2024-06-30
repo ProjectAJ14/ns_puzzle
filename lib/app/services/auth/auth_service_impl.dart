@@ -26,6 +26,10 @@ class AuthServiceImpl extends AuthService<User?> {
       isAuthenticated ? _firebaseAuth.currentUser!.displayName ?? '' : '';
 
   @override
+  String get photoURL =>
+      isAuthenticated ? _firebaseAuth.currentUser!.photoURL ?? '' : '';
+
+  @override
   Future<AppResponse> signInWithGoogle() async {
     developer.log('signInWithGoogle');
     try {

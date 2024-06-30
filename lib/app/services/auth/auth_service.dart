@@ -5,6 +5,7 @@ abstract class AuthService<T> {
   String get userId;
   String get userEmail;
   String get userName;
+  String get photoURL;
   Future<AppResponse> signInWithGoogle();
   Stream<T?> authStateChanges();
   Future<void> signOut();

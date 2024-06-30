@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 
+import '../../../../app/repo/repos.dart';
 import '../../../../app/services/services.dart';
+import '../../../../data/models/user.dart';
 
 class PlayGroundWidget extends StatelessWidget {
   const PlayGroundWidget({
@@ -138,18 +140,28 @@ class PlayGroundWidget extends StatelessWidget {
                 ),
               );
             },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 25,
-                vertical: 10,
-              ),
-              child: Icon(
-                Icons.logout_outlined,
-                size: 28,
-                color: Colors.amber,
-              ),
+            child: const Icon(
+              Icons.logout_outlined,
+              size: 20,
+              color: Colors.amber,
             ),
           ),
+        ),
+        StreamBuilder<User>(
+          stream: fireStoreRepo.topUserStream(),
+          builder: (context, snapshot) {
+            final show = snapshot.data != null;
+
+            return Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: show
+                    ? Text('High Score: ${snapshot.data!.score}')
+                    : const NesHourglassLoadingIndicator(),
+              ),
+            );
+          },
         ),
       ],
     );

@@ -1,26 +1,33 @@
-import 'package:ns_utils/extensions/map.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-import '../../ui/utils/constant.dart';
+part 'user.g.dart';
 
+@JsonSerializable()
 class User {
+  @JsonKey(defaultValue: '')
   final String userId;
+
+  @JsonKey(defaultValue: '', name:'display_name')
   final String displayName;
+
+  @JsonKey(defaultValue: '')
   final String email;
+
+  @JsonKey(defaultValue: '')
+  final String image;
+
+  @JsonKey(defaultValue: 0)
   final int score;
 
   User({
     required this.userId,
     required this.displayName,
     required this.email,
+    this.image = '',
     this.score = 0,
   });
 
-  factory User.fromMap(Map<String, dynamic> json) {
-    return User(
-      userId: json.getString(Constants.userId),
-      displayName: json.getString(Constants.displayName),
-      email: json.getString(Constants.email),
-      score: json.getInt(Constants.score),
-    );
-  }
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }
