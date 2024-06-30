@@ -12,7 +12,7 @@ import '../../../data/models/user.dart';
 import '../../utils/methods.dart';
 import '../../routes/route_constants.dart';
 
-const int totalScore = 1;
+const int totalScore = 100;
 
 class GameController extends GetxController {
   AlignmentGeometry alignment = Alignment.bottomRight;
