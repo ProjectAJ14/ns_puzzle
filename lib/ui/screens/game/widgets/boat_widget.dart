@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 class BoatWidget extends StatelessWidget {
   const BoatWidget({
-    Key? key,
+    super.key,
     required this.isBoatOnLeftSide,
     required this.alignment,
     required this.children,
     required this.boatWidth,
     required this.boatHeight,
     required this.boatPadding,
-  }) : super(key: key);
+  });
 
   final bool isBoatOnLeftSide;
   final AlignmentGeometry alignment;

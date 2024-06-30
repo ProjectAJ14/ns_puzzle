@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ns_puzzle/ui/screens/home/home_controller.dart';
+import 'package:ns_puzzle/ui/screens/game/game_controller.dart';
 
 void main() {
-  HomeController homeController = HomeController();
+  final homeController = GameController();
 
   //Test: Boat is not on the left initially
   test('Boat is on the left initially', () {

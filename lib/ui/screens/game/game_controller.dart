@@ -14,7 +14,7 @@ import '../../routes/route_constants.dart';
 
 const int totalScore = 100;
 
-class HomeController extends GetxController {
+class GameController extends GetxController {
   AlignmentGeometry alignment = Alignment.bottomRight;
 
   bool get isBoatOnLeftSide => alignment == Alignment.bottomLeft;
@@ -42,6 +42,7 @@ class HomeController extends GetxController {
   ConfettiController confettiController =
       ConfettiController(duration: const Duration(seconds: 10));
 
+  //TODO: Optimize this stream
   Stream<int> gameStream = Stream.periodic(
     const Duration(milliseconds: 1),
     (index) => index,
@@ -82,16 +83,9 @@ class HomeController extends GetxController {
 
   List<Subject> onBoat = [];
 
-  void moveBoat() {
+  void moveBoat({required Function(String) onError}) {
     if (onBoat.isEmpty) {
-      Get.snackbar(
-        'Error',
-        'No one is on the boat',
-        snackPosition: SnackPosition.TOP,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        borderRadius: 10,
-      );
+      onError('No one is on the boat');
       return;
     }
     disableInteraction = true;
@@ -117,7 +111,10 @@ class HomeController extends GetxController {
     update();
   }
 
-  void onSubjectTap(Subject subject) {
+  void onSubjectTap(
+    Subject subject, {
+    required Function(String) onError,
+  }) {
     //Is the subject on the boat?
     if (onBoat.contains(subject)) {
       //Remove from boat
@@ -129,14 +126,7 @@ class HomeController extends GetxController {
       }
     } else {
       if (isBoatFull) {
-        Get.snackbar(
-          'Error',
-          'The boat is full',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          borderRadius: 10,
-        );
+        onError('Boat is full!');
         return;
       }
       //Is the subject on the left side? and is the boat on the left side?
@@ -149,14 +139,7 @@ class HomeController extends GetxController {
         rightSide.remove(subject);
         onBoat.insert(0, subject);
       } else {
-        Get.snackbar(
-          'Error',
-          'The Boat is not on the correct side',
-          snackPosition: SnackPosition.TOP,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          borderRadius: 10,
-        );
+        onError('Invalid move!');
       }
     }
     update();
@@ -212,9 +195,7 @@ class HomeController extends GetxController {
       rightList.whereType<Priest>().forEach((element) {
         element.markDead();
       });
-      endGame(
-        reason: 'Devils ate the priests on the right side',
-      );
+      endGame(reason: 'Devils ate the priests on the right side');
       return;
     }
     // Check if devils are more than priests on left side including the boat
@@ -230,9 +211,7 @@ class HomeController extends GetxController {
         element.markDead();
       });
 
-      endGame(
-        reason: 'Devils ate the priests on the left side',
-      );
+      endGame(reason: 'Devils ate the priests on the left side');
       return;
     }
   }
@@ -255,6 +234,21 @@ class HomeController extends GetxController {
   }
 
   void resetGame() {
-    Get.offAllNamed(RouteConstants.splashScreen);
+    leftSide = [];
+    rightSide = [
+      Devil(),
+      Devil(),
+      Devil(),
+      Priest(),
+      Priest(),
+      Priest(),
+    ];
+    onBoat = [];
+    startTime = null;
+    endTime = null;
+    alignment = Alignment.bottomRight;
+    endGameReason = '';
+    confettiController.stop();
+    update();
   }
 }

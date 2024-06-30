@@ -12,9 +12,10 @@ class User {
     required this.userId,
     required this.displayName,
     required this.email,
-    required this.score,
+    this.score = 0,
   });
-  factory User.fromFireStore(Map<String, dynamic> json) {
+
+  factory User.fromMap(Map<String, dynamic> json) {
     return User(
       userId: json.getString(Constants.userId),
       displayName: json.getString(Constants.displayName),

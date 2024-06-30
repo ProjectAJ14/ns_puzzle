@@ -2,40 +2,26 @@
 <html>
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-90VRZCJFXW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-90VRZCJFXW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-90VRZCJFXW');
-</script>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    gtag('config', 'G-90VRZCJFXW');
+  </script>
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <meta name="google-signin-client_id" content="820454982989-rhebl9qcf7m5jslm3u77gkuphkef4jhi.apps.googleusercontent.com">
-
-  
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  <meta name="google-signin-client_id" content="820454982989-rhebl9qcf7m5jslm3u77gkuphkef4jhi.apps.googleusercontent.com">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="ns_puzzle">
+  <meta name="apple-mobile-web-app-title" content="Nonstop Puzzle">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
@@ -43,28 +29,29 @@
 
   <title>ns_puzzle</title>
   <link rel="manifest" href="manifest.json">
-
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
 </head>
 <body>
-  <script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
-      });
-    });
-  </script>
+<div id="appLoader">
+  <img src="assets/loading.gif" alt="Loading..."/>
+  <link rel="stylesheet" href="styles.css">
+</div>
+<script>
+  {{flutter_js}}
+  {{flutter_build_config}}
+  const timeInterval = 200;
+  let appLoader = document.querySelector("#appLoader");
+  appLoader.classList.add("main_done");
+  _flutter.loader.load({
+    onEntrypointLoaded: async function (engineInitializer) {
+      const appRunner = await engineInitializer.initializeEngine();
+      appLoader.classList.add("init_done");
+      await appRunner.runApp();
+      appLoader.classList.add("init_done");
+      window.setTimeout(function () {
+        appLoader.remove();
+      }, timeInterval);
+    }
+  });
+</script>
 </body>
 </html>

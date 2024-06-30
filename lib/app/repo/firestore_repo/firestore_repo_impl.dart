@@ -8,6 +8,7 @@ import 'firestore_repo.dart';
 
 class FireStoreRepoImpl extends FireStoreRepo {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+
   @override
   addUser({
     required User user,
@@ -24,18 +25,14 @@ class FireStoreRepoImpl extends FireStoreRepo {
   Future<AppResponse> getAllTopScoredUsers() async {
     try {
       AppLoader.show();
-      List<User> userList = await users
-          //.where(Constants.score, isGreaterThan: 40)
-          .orderBy(Constants.score, descending: true)
-          .limit(10)
-          .get()
-          .then(
-            (value) => value.docs
-                .map(
-                  (e) => User.fromFireStore(e.data() as Map<String, dynamic>),
-                )
-                .toList(),
-          );
+      List<User> userList =
+          await users.orderBy(Constants.score, descending: true).get().then(
+                (value) => value.docs
+                    .map(
+                      (e) => User.fromMap(e.data() as Map<String, dynamic>),
+                    )
+                    .toList(),
+              );
 
       return AppResponse.success(
         id: 'getAllTopScoredUsers',

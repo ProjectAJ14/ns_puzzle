@@ -9,23 +9,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
   get: ^4.6.6
   flutter_easyloading: ^3.0.5
-  google_sign_in: ^6.1.5
-  ns_firebase_utils: ^1.1.3
+  google_sign_in: ^6.2.1
+  ns_firebase_utils: ^1.1.4
   ns_utils: ^1.1.2
-  flutter_signin_button: ^2.0.0
-  neopop: ^1.0.2
   confetti: ^0.7.0
-  flutter_animate: ^4.2.0+1
+  flutter_animate: ^4.5.0
+  google_fonts: ^6.2.1
+  nes_ui: ^0.20.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.3
+  flutter_lints: ^4.0.0
   flutter_launcher_icons: ^0.13.1
+  build_runner: ^2.4.11
 
 flutter:
 
@@ -36,3 +37,7 @@ flutter:
     - assets/images/
     - assets/icons/
 
+  fonts:
+    - family: Press Start 2P
+      fonts:
+        - asset: assets/fonts/Press_Start_2P/PressStart2P-Regular.ttf

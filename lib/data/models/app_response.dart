@@ -26,7 +26,7 @@ class AppResponse {
 
   bool get isSuccess => statusCode == AppStatusCode.success;
 
-  bool get isError => statusCode == AppStatusCode.error;
+  bool get isFailed => statusCode != AppStatusCode.success;
 
   bool get isNotFound => statusCode == AppStatusCode.notFound;
 

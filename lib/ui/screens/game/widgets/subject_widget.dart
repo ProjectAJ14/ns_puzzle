@@ -5,12 +5,12 @@ import '../../../../data/models/subjects.dart';
 
 class SubjectWidget extends StatelessWidget {
   const SubjectWidget({
-    Key? key,
+    super.key,
     required this.subject,
     required this.onSubjectTap,
     required this.subjectWidth,
     required this.subjectHeight,
-  }) : super(key: key);
+  });
 
   final Subject subject;
   final Function(Subject subject) onSubjectTap;

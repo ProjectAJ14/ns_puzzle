@@ -1,26 +1,20 @@
 import 'package:get/get.dart';
 
 import '../screens/home/home_screen.dart';
-import '../screens/sign_in/sign_in_screen.dart';
-import '../screens/splash/splash_screen.dart';
-import '../screens/top_users/top_users_screen.dart';
+import '../screens/leaderboard/leaderboard_screen.dart';
 import 'route_constants.dart';
+
+const defaultTransition = Transition.topLevel;
 
 List<GetPage<dynamic>> appScreens() => [
       GetPage(
-        name: RouteConstants.splashScreen,
-        page: () => const SplashScreen(),
-      ),
-      GetPage(
-        name: RouteConstants.signIn,
-        page: () => const SignInScreen(),
-      ),
-      GetPage(
         name: RouteConstants.home,
         page: () => const HomeScreen(),
+        transition: defaultTransition,
       ),
       GetPage(
         name: RouteConstants.topUsers,
-        page: () => const TopUserScreen(),
+        page: () => const LeaderboardScreen(),
+        transition: defaultTransition,
       ),
     ];
