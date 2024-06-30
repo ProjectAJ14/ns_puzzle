@@ -34,8 +34,8 @@ class GameScreen extends StatelessWidget {
         }
         double subjectHeight = (16 * subjectWidth) / 9;
         double boatWidth = subjectWidth * 3.5;
-        double boatHeight = subjectHeight / 2;
-        double boatPadding = subjectWidth * 0.3;
+        double boatHeight = subjectHeight * 0.9;
+        double boatPadding = subjectWidth * 0.1;
 
         developer.log('maxWidth ${snapshot.maxWidth}');
         developer.log('maxHeight ${snapshot.maxHeight}');
@@ -91,32 +91,27 @@ class GameScreen extends StatelessWidget {
                                         )
                                         .toList(),
                                   ),
-                                  centerWidget: Stack(
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      BoatWidget(
-                                        boatWidth: boatWidth,
-                                        boatHeight: boatHeight,
-                                        boatPadding: boatPadding,
-                                        isBoatOnLeftSide:
-                                            controller.isBoatOnLeftSide,
-                                        alignment: controller.alignment,
-                                        children: controller.onBoat
-                                            .map(
-                                              (subject) => SubjectWidget(
-                                                subjectWidth: subjectWidth,
-                                                subjectHeight: subjectHeight,
-                                                subject: subject,
-                                                onSubjectTap: (subject) =>
-                                                    controller.onSubjectTap(
-                                                  subject,
-                                                  onError: showSnackBar,
-                                                ),
-                                              ),
-                                            )
-                                            .toList(),
-                                      ),
-                                    ],
+                                  centerWidget: BoatWidget(
+                                    boatWidth: boatWidth,
+                                    boatHeight: boatHeight,
+                                    boatPadding: boatPadding,
+                                    isBoatOnLeftSide:
+                                        controller.isBoatOnLeftSide,
+                                    alignment: controller.alignment,
+                                    children: controller.onBoat
+                                        .map(
+                                          (subject) => SubjectWidget(
+                                            subjectWidth: subjectWidth,
+                                            subjectHeight: subjectHeight,
+                                            subject: subject,
+                                            onSubjectTap: (subject) =>
+                                                controller.onSubjectTap(
+                                              subject,
+                                              onError: showSnackBar,
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
                                   ),
                                   rightSideWidget: Row(
                                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -282,7 +277,7 @@ class GameScreen extends StatelessWidget {
     return [
       ModalBarrier(
         dismissible: false,
-        color: Colors.red.withOpacity(0.3),
+        color: Colors.red.withOpacity(0.5),
       ),
       Center(
         child: Column(

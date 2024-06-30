@@ -192,9 +192,13 @@ class GameController extends GetxController {
     int totalLadies = rightList.whereType<Lady>().length;
     if (totalDevils > totalLadies && totalLadies > 0) {
       //Mark all ladies as dead
-      rightList.whereType<Lady>().forEach((element) {
-        element.markDead();
-      });
+      for (var element in rightList) {
+        if (element is Lady) {
+          element.markDead();
+        } else if (element is Devil) {
+          element.animate = true;
+        }
+      }
       endGame(reason: 'Devils killed the ladies on the right side');
       return;
     }
@@ -207,11 +211,15 @@ class GameController extends GetxController {
     totalLadies = leftList.whereType<Lady>().length;
     if (totalDevils > totalLadies && totalLadies > 0) {
       //Mark all ladies as dead
-      leftList.whereType<Lady>().forEach((element) {
-        element.markDead();
-      });
+      for (var element in rightList) {
+        if (element is Lady) {
+          element.markDead();
+        } else if (element is Devil) {
+          element.animate = true;
+        }
+      }
 
-      endGame(reason: 'Devils ate the ladies on the left side');
+      endGame(reason: 'Devils killed the ladies on the left side');
       return;
     }
   }

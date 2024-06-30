@@ -33,7 +33,16 @@ class BoatWidget extends StatelessWidget {
           clipBehavior: Clip.none,
           children: [
             Positioned(
-              bottom: -10,
+              bottom: boatPadding,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: children,
+              ),
+            ),
+            Positioned(
+              bottom: -boatHeight / 3,
               child: Transform(
                 alignment: Alignment.center,
                 transform: isBoatOnLeftSide
@@ -44,18 +53,6 @@ class BoatWidget extends StatelessWidget {
                   fit: BoxFit.fill,
                   height: boatHeight,
                   width: boatWidth,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: boatPadding,
-              child: SizedBox(
-                // width: boatWidth - boatWidth / 3,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: children,
                 ),
               ),
             ),

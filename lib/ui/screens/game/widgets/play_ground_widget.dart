@@ -25,17 +25,26 @@ class PlayGroundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final boxWidth = subjectWidth * 6;
+
     return Stack(
       children: [
         Column(
           children: [
             Flexible(
               child: Container(
-                color: Colors.blue.shade100,
+                decoration: BoxDecoration(
+                  color: Colors.blue.shade100,
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/background.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    _buildSide(
+                    SizedBox(
+                      width: boxWidth,
                       child: leftSideWidget,
                     ),
                     Expanded(
@@ -43,7 +52,8 @@ class PlayGroundWidget extends StatelessWidget {
                         child: centerWidget,
                       ),
                     ),
-                    _buildSide(
+                    SizedBox(
+                      width: boxWidth,
                       child: rightSideWidget,
                     ),
                   ],
@@ -54,18 +64,39 @@ class PlayGroundWidget extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildSide(
-                    color: Colors.brown,
+                  Container(
+                    width: boxWidth,
+                    decoration: const BoxDecoration(
+                      color: Colors.brown,
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/land.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                     child: bottomLeftSideWidget,
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.blue,
+                      width: boxWidth,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/water.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                       child: bottomCenterWidget,
                     ),
                   ),
-                  _buildSide(
-                    color: Colors.brown,
+                  Container(
+                    width: boxWidth,
+                    decoration: const BoxDecoration(
+                      color: Colors.brown,
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/land.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                     child: bottomRightSideWidget,
                   ),
                 ],
@@ -121,17 +152,6 @@ class PlayGroundWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildSide({
-    Color? color,
-    Widget? child,
-  }) {
-    return Container(
-      width: subjectWidth * 6,
-      color: color,
-      child: child,
     );
   }
 }
