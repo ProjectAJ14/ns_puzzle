@@ -57,11 +57,7 @@ class GameController extends GetxController {
   void _gameListener(event) {
     int score = _calculateScore();
     if (score <= 0 && !isGameEnded && isGameStarted) {
-      endGame(
-        reason: 'You ran out of time!',
-      );
-    } else {
-      developer.log("score: $score");
+      endGame(reason: 'You ran out of time!');
     }
   }
 

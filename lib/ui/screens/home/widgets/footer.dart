@@ -10,8 +10,9 @@ class Footer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Row(
         children: [
-          const Text(
+          Text(
             'Made with Flutter',
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           const Icon(
             Icons.favorite,

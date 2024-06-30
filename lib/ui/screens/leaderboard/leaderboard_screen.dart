@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nes_ui/nes_ui.dart';
 
 import '../../../app/repo/repos.dart';
+import '../../routes/route_constants.dart';
 import 'widgets/user_table_widget.dart';
 
 class LeaderboardScreen extends StatelessWidget {
@@ -26,13 +28,16 @@ class LeaderboardScreen extends StatelessWidget {
           ],
         ),
         centerTitle: true,
-        leading: const CloseButton(),
+        leading: CloseButton(
+          onPressed: () {
+            Get.offAllNamed(RouteConstants.home);
+          },
+        ),
       ),
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: height * 1.5,
           width: width,
-          color: Colors.blue.shade100,
           child: Center(
             child: StreamBuilder(
               stream: fireStoreRepo.leaderboardStream(),
@@ -58,6 +63,10 @@ class LeaderboardScreen extends StatelessWidget {
                             size: MediaQuery.of(context).size.width * 0.1,
                           ),
                           Text(
+                            highestScorer.score.toString(),
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                          Text(
                             highestScorer.displayName,
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
@@ -65,12 +74,10 @@ class LeaderboardScreen extends StatelessWidget {
                             highestScorer.email,
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
-                          Text(
-                            highestScorer.score.toString(),
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
                           const SizedBox(height: 16),
-                          const Divider(),
+                          const Divider(
+                            indent: 10,
+                          ),
                         ],
                         Flexible(child: UserTableWidget(users: users)),
                       ],
