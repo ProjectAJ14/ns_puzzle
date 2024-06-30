@@ -11,13 +11,13 @@ import 'widgets/boat_widget.dart';
 import 'widgets/play_ground_widget.dart';
 import 'widgets/subject_widget.dart';
 
-const String instructions = '''There are 3 devils and 3 Priests. 
+const String instructions = '''There are 3 devils and 3 Ladies. 
        They all have to cross a river in a boat. 
        The boat can only carry two people at a time. 
-       As long as there is an equal number of devils and priests, 
-       then devils will not eat Priest. If the number of devils is 
-       greater than the number of priests on the same side of the river 
-       then devils will eat the priests. So how can we make all the 6 
+       As long as there is an equal number of devils and ladies, 
+       then devils will not eat Ladies. If the number of devils is 
+       greater than the number of ladies on the same side of the river 
+       then devils will eat the ladies. So how can we make all the 6 
        people arrive on the other side safely?''';
 
 class GameScreen extends StatelessWidget {
@@ -27,9 +27,10 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, snapshot) {
-        double subjectWidth = snapshot.maxWidth / 24;
+        const factor = 21;
+        double subjectWidth = snapshot.maxWidth / factor;
         if (snapshot.maxWidth < snapshot.maxHeight) {
-          subjectWidth = snapshot.maxHeight / 24;
+          subjectWidth = snapshot.maxHeight / factor;
         }
         double subjectHeight = (16 * subjectWidth) / 9;
         double boatWidth = subjectWidth * 3.5;

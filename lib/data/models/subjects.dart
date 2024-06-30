@@ -12,9 +12,9 @@ class Devil extends Subject {
   String get image => 'assets/images/devil.png';
 }
 
-class Priest extends Subject {
+class Lady extends Subject {
   @override
-  String toString() => 'Priest';
+  String toString() => 'Lady';
 
   bool _isDead = false;
 
@@ -26,5 +26,5 @@ class Priest extends Subject {
   bool get isDead => _isDead;
 
   @override
-  String get image => 'assets/images/priest.png';
+  String get image => 'assets/images/lady.png';
 }

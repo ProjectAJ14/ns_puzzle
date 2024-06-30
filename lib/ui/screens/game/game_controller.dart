@@ -76,9 +76,9 @@ class GameController extends GetxController {
     Devil(),
     Devil(),
     Devil(),
-    Priest(),
-    Priest(),
-    Priest(),
+    Lady(),
+    Lady(),
+    Lady(),
   ];
 
   List<Subject> onBoat = [];
@@ -165,7 +165,7 @@ class GameController extends GetxController {
   }
 
   void leaderBoardClick() {
-    Get.toNamed(RouteConstants.topUsers);
+    Get.toNamed(RouteConstants.leaderboard);
   }
 
   int _calculateScore() {
@@ -183,44 +183,44 @@ class GameController extends GetxController {
   }
 
   void checkGameEnd() {
-    // Check if devils are more than priests on right side including the boat
+    // Check if devils are more than ladies on right side including the boat
     List<Subject> rightList = [...rightSide];
     if (isBoatOnRightSide) {
       rightList.addAll(onBoat);
     }
     int totalDevils = rightList.whereType<Devil>().length;
-    int totalPriests = rightList.whereType<Priest>().length;
-    if (totalDevils > totalPriests && totalPriests > 0) {
-      //Mark all priest as dead
-      rightList.whereType<Priest>().forEach((element) {
+    int totalLadies = rightList.whereType<Lady>().length;
+    if (totalDevils > totalLadies && totalLadies > 0) {
+      //Mark all ladies as dead
+      rightList.whereType<Lady>().forEach((element) {
         element.markDead();
       });
-      endGame(reason: 'Devils ate the priests on the right side');
+      endGame(reason: 'Devils killed the ladies on the right side');
       return;
     }
-    // Check if devils are more than priests on left side including the boat
+    // Check if devils are more than ladies on left side including the boat
     List<Subject> leftList = [...leftSide];
     if (isBoatOnLeftSide) {
       leftList.addAll(onBoat);
     }
     totalDevils = leftList.whereType<Devil>().length;
-    totalPriests = leftList.whereType<Priest>().length;
-    if (totalDevils > totalPriests && totalPriests > 0) {
-      //Mark all priest as dead
-      leftList.whereType<Priest>().forEach((element) {
+    totalLadies = leftList.whereType<Lady>().length;
+    if (totalDevils > totalLadies && totalLadies > 0) {
+      //Mark all ladies as dead
+      leftList.whereType<Lady>().forEach((element) {
         element.markDead();
       });
 
-      endGame(reason: 'Devils ate the priests on the left side');
+      endGame(reason: 'Devils ate the ladies on the left side');
       return;
     }
   }
 
   void checkWin() {
-    // Check if all devils and all priests are on the left side
+    // Check if all devils and all ladies are on the left side
     int totalDevils = leftSide.whereType<Devil>().length;
-    int totalPriests = leftSide.whereType<Priest>().length;
-    if (totalDevils + totalPriests == 6) {
+    int totalLadies = leftSide.whereType<Lady>().length;
+    if (totalDevils + totalLadies == 6) {
       endTime = DateTime.now();
       update();
       confettiController.play();
@@ -239,9 +239,9 @@ class GameController extends GetxController {
       Devil(),
       Devil(),
       Devil(),
-      Priest(),
-      Priest(),
-      Priest(),
+      Lady(),
+      Lady(),
+      Lady(),
     ];
     onBoat = [];
     startTime = null;

@@ -5,9 +5,9 @@ import '../../../../data/models/user.dart';
 import 'text_cell.dart';
 
 class UserTableWidget extends StatelessWidget {
-  final List<User> userList;
+  final List<User> users;
 
-  const UserTableWidget({super.key, required this.userList});
+  const UserTableWidget({super.key, required this.users});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class UserTableWidget extends StatelessWidget {
           DataColumn(label: TextCell("Email", columnHeader: true)),
           DataColumn(label: TextCell("Score", columnHeader: true)),
         ],
-        rows: userList.map((user) {
+        rows: users.map((user) {
           return DataRow(
             cells: [
               DataCell(TextCell(user.displayName, columnHeader: false)),
@@ -27,10 +27,6 @@ class UserTableWidget extends StatelessWidget {
             ],
           );
         }).toList(),
-        border: TableBorder.all(
-          width: 0.5,
-          color: Colors.white,
-        ),
       ),
     );
   }

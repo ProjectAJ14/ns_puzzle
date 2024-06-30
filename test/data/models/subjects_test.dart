@@ -7,9 +7,9 @@ void main() {
     expect(Devil().toString(), 'Devil');
   });
 
-// Test: Priest toString
-  test('Priest toString', () {
-    expect(Priest().toString(), 'Priest');
+// Test: Lady toString
+  test('Lady toString', () {
+    expect(Lady().toString(), 'Lady');
   });
 
   //Test: Devil image
@@ -17,8 +17,8 @@ void main() {
     expect(Devil().image, 'assets/images/devil.png');
   });
 
-// Test: Priest image
-  test('Priest image', () {
-    expect(Priest().image, 'assets/images/priest.png');
+// Test: Lady image
+  test('Lady image', () {
+    expect(Lady().image, 'assets/images/lady.png');
   });
 }

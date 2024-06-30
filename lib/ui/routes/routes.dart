@@ -13,7 +13,7 @@ List<GetPage<dynamic>> appScreens() => [
         transition: defaultTransition,
       ),
       GetPage(
-        name: RouteConstants.topUsers,
+        name: RouteConstants.leaderboard,
         page: () => const LeaderboardScreen(),
         transition: defaultTransition,
       ),

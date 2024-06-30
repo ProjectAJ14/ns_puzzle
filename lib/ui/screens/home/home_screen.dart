@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
         } else {
           if (snapshot.data != null) {
             return const GameScreen();
-            return const GameScreen();
           } else {
             return const SignInScreen();
           }
