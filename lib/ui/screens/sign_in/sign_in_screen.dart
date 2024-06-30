@@ -11,127 +11,110 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, snapshot) {
-        const factor = 12;
-        double subjectWidth = snapshot.maxWidth / factor;
-        return Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(100),
-            child: Column(
-              children: [
-                Flexible(
-                  child: GetBuilder<SignInController>(
-                    init: SignInController(),
-                    builder: (controller) {
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            child: NesContainer(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: Stack(
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
+        child: Column(
+          children: [
+            Flexible(
+              child: GetBuilder<SignInController>(
+                init: SignInController(),
+                builder: (controller) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            const factor = 7;
+                            final splitFactor =
+                                constraints.maxWidth < constraints.maxHeight
+                                    ? constraints.maxWidth
+                                    : constraints.maxHeight;
+                            double subjectWidth = splitFactor / factor;
+                            double subjectHeight = (16 * subjectWidth) / 9;
+                            return NesContainer(
+                              backgroundColor: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Center(
-                                    child: RichText(
-                                      textAlign: TextAlign.center,
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'DEVILS',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                          TextSpan(
-                                            text: '\nvs\n',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyLarge,
-                                          ),
-                                          TextSpan(
-                                            text: 'LADIES',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                        ],
-                                      ),
+                                  RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall,
+                                      children: [
+                                        const TextSpan(text: 'LADIES'),
+                                        TextSpan(
+                                          text: '\nvs\n',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                        const TextSpan(text: 'DEVILS'),
+                                      ],
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: List.generate(
-                                          3,
-                                          (index) => Image(
-                                            width: subjectWidth,
-                                            image: const AssetImage(
-                                              'assets/images/lady.gif',
-                                            ),
+                                  SizedBox(
+                                    height: subjectHeight * 0.05,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ...List.generate(
+                                        6,
+                                        (index) => Image(
+                                          width: subjectWidth,
+                                          height: subjectHeight,
+                                          fit: BoxFit.fitHeight,
+                                          image: AssetImage(
+                                            'assets/images/${index > 2 ? 'devil' : 'lady'}.${index <= 2 ? 'gif' : 'png'}',
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: List.generate(
-                                          3,
-                                          (index) => Image(
-                                            width: subjectWidth,
-                                            image: const AssetImage(
-                                              'assets/images/devil.gif',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                          Flexible(
-                            child: NesContainer(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.surface,
-                              child: Center(
-                                child: NesButton(
-                                  onPressed: () => controller.signInWithGoogle(
-                                    onError: (message) => showInfoDialog(
-                                      context,
-                                      message: message,
-                                    ),
-                                  ),
-                                  type: NesButtonType.primary,
-                                  child: const Text('Sign In with Google'),
+                            );
+                          },
+                        ),
+                      ),
+                      Flexible(
+                        child: NesContainer(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                          child: Center(
+                            child: NesButton(
+                              onPressed: () => controller.signInWithGoogle(
+                                onError: (message) => showInfoDialog(
+                                  context,
+                                  message: message,
                                 ),
+                              ),
+                              type: NesButtonType.primary,
+                              child: const Text(
+                                'Sign In with Google',
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                const Footer(),
-              ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
-          ),
-        );
-      },
+            const Footer(),
+          ],
+        ),
+      ),
     );
   }
 }

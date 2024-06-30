@@ -21,7 +21,7 @@ class Footer extends StatelessWidget {
           const Spacer(),
           Image.asset(
             'assets/icons/logo.png',
-            width: 100,
+            width: 70,
           ),
         ],
       ),

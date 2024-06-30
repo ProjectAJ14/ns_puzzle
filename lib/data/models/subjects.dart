@@ -33,5 +33,5 @@ class Lady extends Subject {
   bool get isDead => _isDead;
 
   @override
-  String get image => 'assets/images/lady.png';
+  String get image => 'assets/images/lady.gif';
 }
