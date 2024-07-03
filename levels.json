@@ -1,0 +1,151 @@
+{
+  "levels": {
+    "1": {
+      "title": "The Clever Farmer",
+      "instructions": "There is a farmer who wishes to cross a river but he is not alone. He also has a goat, a wolf, and a cabbage along with him. There is only one boat available which can support the farmer and either of the goat, wolf or the cabbage. So at a time, the boat can have only two objects (farmer and one other).\nBut the problem is, if the goat and wolf are left alone (either in the boat or onshore), the wolf will eat the goat. Similarly, if the Goat and cabbage are left alone, then goat will eat the cabbage. The farmer wants to cross the river with all three of his belongings: goat, wolf, and cabbage.\nWhat strategy he should use to do so?",
+      "characters": [
+        "farmer",
+        "wolf",
+        "goat",
+        "cabbage"
+      ],
+      "killWord": "Eaten by",
+      "KillConditions": [
+        {
+          "condition": "absent",
+          "character": "farmer",
+          "killer": "wolf",
+          "victim": "goat"
+        },
+        {
+          "condition": "absent",
+          "character": "farmer",
+          "killer": "goat",
+          "victim": "cabbage"
+        }
+      ],
+      "images": {
+        "farmer": "farmer.png",
+        "wolf": "wolf.png",
+        "goat": "goat.png"
+      }
+    },
+    "2": {
+      "title": "Missionaries Vs Cannibals",
+      "instructions": "Three missionaries and three cannibals come to a river and find a boat that holds two people. Everyone must get across the river to continue on the journey. However, if the cannibals ever outnumber the missionaries on either bank, the missionaries will be eaten. Find a series of crossings that will get everyone safely to the other side of the river.",
+      "characters": [
+        "missionary",
+        "cannibal"
+      ],
+      "killWord": "Eaten by",
+      "killConditions": [
+        {
+          "condition": "greater",
+          "killer": "cannibal",
+          "victim": "missionary"
+        }
+      ],
+      "images": {
+        "missionary": "missionary.png",
+        "cannibal": "cannibal.png"
+      }
+    },
+    "3": {
+      "title": "The Jealous Husband",
+      "instructions": "Three couples need to cross a river in a boat. The boat can carry at most two people. The husbands are so jealous that they can not let their wife with another man, without their presence.",
+      "characters": [
+        "redHusband",
+        "redWife",
+        "blueHusband",
+        "blueWife",
+        "greenHusband",
+        "greenWife"
+      ],
+      "killWord": "Killed by",
+      "killConditions": [
+        {
+          "condition": "absent",
+          "character": "redHusband",
+          "killer": "blueHusband",
+          "victim": "redWife"
+        },
+        {
+          "condition": "absent",
+          "character": "redHusband",
+          "killer": "greenHusband",
+          "victim": "redWife"
+        },
+        {
+          "condition": "absent",
+          "character": "blueHusband",
+          "killer": "redHusband",
+          "victim": "blueWife"
+        },
+        {
+          "condition": "absent",
+          "character": "blueHusband",
+          "killer": "greenHusband",
+          "victim": "blueWife"
+        },
+        {
+          "condition": "absent",
+          "character": "greenHusband",
+          "killer": "redHusband",
+          "victim": "greenWife"
+        },
+        {
+          "condition": "absent",
+          "character": "greenHusband",
+          "killer": "blueHusband",
+          "victim": "greenWife"
+        }
+      ],
+      "images": {
+        "redHusband": "redHusband.png",
+        "redWife": "redWife.png",
+        "blueHusband": "blueHusband.png",
+        "blueWife": "blueWife.png",
+        "greenHusband": "greenHusband.png",
+        "greenWife": "greenWife.png"
+      }
+    },
+    "4": {
+      "title": "Men and Money",
+      "instructions": "Three men must cross the river with three bags of money, but if the total amount of money in the bags is more than the men own, they'll steal the money and run away.",
+      "characters": [
+        "redMan",
+        "redMoney",
+        "blueMan",
+        "blueMoney",
+        "greenMan",
+        "greenMoney"
+      ],
+      "killWord": "Stolen by",
+      "values": {
+        "redMoney": 10000,
+        "blueMoney": 20000,
+        "greenMoney": 30000
+      },
+      "killConditions": [
+        {
+          "condition": "absent",
+          "character": "blueMan",
+          "killer": "redMan",
+          "victim": "blueMoney"
+        },
+        {
+          "condition": "absent",
+          "character": "greenMan",
+          "killer": "redMan",
+          "victim": "greenMoney"
+        },
+        {
+          "condition": "absent",
+          "character": "greenMan",
+          "killer": "blueMan",
+          "victim": "greenMoney"
+        }
+      ]
+    }
+  }
+}

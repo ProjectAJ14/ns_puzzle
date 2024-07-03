@@ -1,3 +1,7 @@
-# ns_puzzle
+# Nonstop Puzzle
 
-Level 1 : Ladies vs Devils
+A puzzle game of puzzle games.
+
+## Game 1: River Crossing
+## Game 2: Coming Soon
+
