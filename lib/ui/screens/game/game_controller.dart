@@ -165,7 +165,8 @@ class GameController extends GetxController {
   }
 
   void checkGameEnd() {
-    // Check if cancer cells are more than CAR-T cells on right side including the boat
+    // Check if cancer cells outnumber CAR-T cells
+    // on the right side (including the boat)
     List<Subject> rightList = [...rightSide];
     if (isBoatOnRightSide) {
       rightList.addAll(onBoat);
@@ -179,10 +180,14 @@ class GameController extends GetxController {
           element.markDead();
         }
       }
-      endGame(reason: 'Cancer Cells suppressed the CAR-T Cells on the right side');
+      endGame(
+        reason: 'Cancer Cells suppressed the '
+            'CAR-T Cells on the right side',
+      );
       return;
     }
-    // Check if cancer cells are more than CAR-T cells on left side including the boat
+    // Check if cancer cells outnumber CAR-T cells
+    // on the left side (including the boat)
     List<Subject> leftList = [...leftSide];
     if (isBoatOnLeftSide) {
       leftList.addAll(onBoat);
@@ -197,7 +202,10 @@ class GameController extends GetxController {
         }
       }
 
-      endGame(reason: 'Cancer Cells suppressed the CAR-T Cells on the left side');
+      endGame(
+        reason: 'Cancer Cells suppressed the '
+            'CAR-T Cells on the left side',
+      );
       return;
     }
   }

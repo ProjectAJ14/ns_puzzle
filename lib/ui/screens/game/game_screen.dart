@@ -211,7 +211,7 @@ class GameScreen extends StatelessWidget {
     return [
       ModalBarrier(
         dismissible: false,
-        color: Colors.black.withOpacity(0.5),
+        color: Colors.black.withValues(alpha: 0.5),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -267,7 +267,7 @@ class GameScreen extends StatelessWidget {
     return [
       ModalBarrier(
         dismissible: false,
-        color: Colors.red.withOpacity(0.5),
+        color: Colors.red.withValues(alpha: 0.5),
       ),
       Center(
         child: Column(
@@ -329,7 +329,7 @@ class GameScreen extends StatelessWidget {
     return [
       ModalBarrier(
         dismissible: false,
-        color: Colors.green.withOpacity(0.8),
+        color: Colors.green.withValues(alpha: 0.8),
       ),
       Center(
         child: Column(

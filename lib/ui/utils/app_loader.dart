@@ -15,7 +15,7 @@ class AppLoader {
       ..backgroundColor = Colors.black54
       ..indicatorColor = Colors.white38
       ..textColor = Colors.white
-      ..maskColor = Colors.white.withOpacity(0.5);
+      ..maskColor = Colors.white.withValues(alpha: 0.5);
 
     EasyLoading.addStatusCallback((status) {
       developer.log('EasyLoading status[$status]');
