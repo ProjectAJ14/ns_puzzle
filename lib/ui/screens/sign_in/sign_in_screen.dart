@@ -49,14 +49,14 @@ class SignInScreen extends StatelessWidget {
                                           .textTheme
                                           .headlineSmall,
                                       children: [
-                                        const TextSpan(text: 'LADIES'),
+                                        const TextSpan(text: 'CAR-T'),
                                         TextSpan(
                                           text: '\nvs\n',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyLarge,
                                         ),
-                                        const TextSpan(text: 'DEVILS'),
+                                        const TextSpan(text: 'CANCER'),
                                       ],
                                     ),
                                   ),
@@ -73,7 +73,7 @@ class SignInScreen extends StatelessWidget {
                                           height: subjectHeight,
                                           fit: BoxFit.fitHeight,
                                           image: AssetImage(
-                                            'assets/images/${index > 2 ? 'devil' : 'lady'}.${index <= 2 ? 'gif' : 'png'}',
+                                            'assets/images/${index > 2 ? 'cancer-cell' : 'cart-t-cell'}.png',
                                           ),
                                         ),
                                       ),

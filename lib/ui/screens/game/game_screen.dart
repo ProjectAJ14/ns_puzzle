@@ -11,14 +11,8 @@ import 'widgets/boat_widget.dart';
 import 'widgets/play_ground_widget.dart';
 import 'widgets/subject_widget.dart';
 
-const String instructions = '''There are 3 devils and 3 Ladies. 
-       They all have to cross a river in a boat. 
-       The boat can only carry two people at a time. 
-       As long as there is an equal number of devils and ladies, 
-       then devils will not eat Ladies. If the number of devils is 
-       greater than the number of ladies on the same side of the river 
-       then devils will eat the ladies. So how can we make all the 6 
-       people arrive on the other side safely?''';
+const String instructions =
+    '''A patient needs CAR-T cell therapy. Move 3 CAR-T Cells and 3 Cancer Cells from the Tumor Microenvironment(Right Side) across the Bloodstream to the Lymph Node(Left Side). The transport vessel can carry only two cells at a time. If Cancer Cells ever outnumber CAR-T Cells on either side, they suppress the immune response and the patient relapses. Can you get all 6 cells safely to the Lymph Node?''';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});
@@ -226,19 +220,15 @@ class GameScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: NesWindow(
               title: 'Instructions',
-              child: Center(
-                child: FittedBox(
-                  child: Text(
-                    instructions,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              child: Text(
+                instructions,
+                textAlign: TextAlign.justify,
               ),
             ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: NesButton(
                 onPressed: () => startGame(),
                 type: NesButtonType.primary,

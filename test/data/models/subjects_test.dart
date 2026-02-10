@@ -2,23 +2,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ns_puzzle/data/models/subjects.dart';
 
 void main() {
-// Test: Devil toString
-  test('Devil toString', () {
-    expect(Devil().toString(), 'Devil');
+// Test: CancerCell toString
+  test('CancerCell toString', () {
+    expect(CancerCell().toString(), 'CancerCell');
   });
 
-// Test: Lady toString
-  test('Lady toString', () {
-    expect(Lady().toString(), 'Lady');
+// Test: CARTCell toString
+  test('CARTCell toString', () {
+    expect(CARTCell().toString(), 'CARTCell');
   });
 
-  //Test: Devil image
-  test('Devil image', () {
-    expect(Devil().image, 'assets/images/devil.png');
+  //Test: CancerCell image
+  test('CancerCell image', () {
+    expect(CancerCell().image, 'assets/images/cancer-cell.png');
   });
 
-// Test: Lady image
-  test('Lady image', () {
-    expect(Lady().image, 'assets/images/lady.png');
+// Test: CARTCell image
+  test('CARTCell image', () {
+    expect(CARTCell().image, 'assets/images/cart-t-cell.png');
   });
 }

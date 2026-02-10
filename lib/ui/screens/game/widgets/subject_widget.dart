@@ -21,13 +21,11 @@ class SubjectWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (subject.isDead) {
       return Image.asset(
-        'assets/images/chicken.png',
+        'assets/images/cart-t-cell-killed.png',
         fit: BoxFit.fill,
         width: subjectWidth,
         height: subjectHeight,
-      ).animate().shake(duration: 1.seconds).then(delay: 300.ms).hide(
-            duration: 500.ms,
-          );
+      ).animate().shake(duration: 1.seconds).then(delay: 300.ms);
     }
 
     return GestureDetector(

@@ -4,24 +4,17 @@ abstract class Subject {
   bool get isDead => false;
 }
 
-class Devil extends Subject {
+class CancerCell extends Subject {
   @override
-  String toString() => 'Devil';
-
-  bool _animate = false;
-
-  set animate(bool value) {
-    _animate = value;
-  }
+  String toString() => 'CancerCell';
 
   @override
-  String get image =>
-      _animate ? 'assets/images/devil.gif' : 'assets/images/devil.png';
+  String get image => 'assets/images/cancer-cell.png';
 }
 
-class Lady extends Subject {
+class CARTCell extends Subject {
   @override
-  String toString() => 'Lady';
+  String toString() => 'CARTCell';
 
   bool _isDead = false;
 
@@ -33,5 +26,5 @@ class Lady extends Subject {
   bool get isDead => _isDead;
 
   @override
-  String get image => 'assets/images/lady.png';
+  String get image => 'assets/images/cart-t-cell.png';
 }

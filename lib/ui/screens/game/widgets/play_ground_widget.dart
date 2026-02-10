@@ -71,7 +71,7 @@ class PlayGroundWidget extends StatelessWidget {
                     decoration: const BoxDecoration(
                       color: Colors.brown,
                       image: DecorationImage(
-                        image: AssetImage('assets/images/land.png'),
+                        image: AssetImage('assets/images/left.png'),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -95,7 +95,7 @@ class PlayGroundWidget extends StatelessWidget {
                     decoration: const BoxDecoration(
                       color: Colors.brown,
                       image: DecorationImage(
-                        image: AssetImage('assets/images/land.png'),
+                        image: AssetImage('assets/images/right.png'),
                         fit: BoxFit.fill,
                       ),
                     ),

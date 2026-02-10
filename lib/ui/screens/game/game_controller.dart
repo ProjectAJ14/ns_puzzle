@@ -68,12 +68,12 @@ class GameController extends GetxController {
 
   List<Subject> leftSide = [];
   List<Subject> rightSide = [
-    Devil(),
-    Devil(),
-    Devil(),
-    Lady(),
-    Lady(),
-    Lady(),
+    CancerCell(),
+    CancerCell(),
+    CancerCell(),
+    CARTCell(),
+    CARTCell(),
+    CARTCell(),
   ];
 
   List<Subject> onBoat = [];
@@ -165,52 +165,48 @@ class GameController extends GetxController {
   }
 
   void checkGameEnd() {
-    // Check if devils are more than ladies on right side including the boat
+    // Check if cancer cells are more than CAR-T cells on right side including the boat
     List<Subject> rightList = [...rightSide];
     if (isBoatOnRightSide) {
       rightList.addAll(onBoat);
     }
-    int totalDevils = rightList.whereType<Devil>().length;
-    int totalLadies = rightList.whereType<Lady>().length;
-    if (totalDevils > totalLadies && totalLadies > 0) {
-      //Mark all ladies as dead
+    int totalCancerCells = rightList.whereType<CancerCell>().length;
+    int totalCARTCells = rightList.whereType<CARTCell>().length;
+    if (totalCancerCells > totalCARTCells && totalCARTCells > 0) {
+      //Mark all CAR-T cells as dead
       for (var element in rightList) {
-        if (element is Lady) {
+        if (element is CARTCell) {
           element.markDead();
-        } else if (element is Devil) {
-          element.animate = true;
         }
       }
-      endGame(reason: 'Devils killed the ladies on the right side');
+      endGame(reason: 'Cancer Cells suppressed the CAR-T Cells on the right side');
       return;
     }
-    // Check if devils are more than ladies on left side including the boat
+    // Check if cancer cells are more than CAR-T cells on left side including the boat
     List<Subject> leftList = [...leftSide];
     if (isBoatOnLeftSide) {
       leftList.addAll(onBoat);
     }
-    totalDevils = leftList.whereType<Devil>().length;
-    totalLadies = leftList.whereType<Lady>().length;
-    if (totalDevils > totalLadies && totalLadies > 0) {
-      //Mark all ladies as dead
-      for (var element in rightList) {
-        if (element is Lady) {
+    totalCancerCells = leftList.whereType<CancerCell>().length;
+    totalCARTCells = leftList.whereType<CARTCell>().length;
+    if (totalCancerCells > totalCARTCells && totalCARTCells > 0) {
+      //Mark all CAR-T cells as dead
+      for (var element in leftList) {
+        if (element is CARTCell) {
           element.markDead();
-        } else if (element is Devil) {
-          element.animate = true;
         }
       }
 
-      endGame(reason: 'Devils killed the ladies on the left side');
+      endGame(reason: 'Cancer Cells suppressed the CAR-T Cells on the left side');
       return;
     }
   }
 
   void checkWin() {
-    // Check if all devils and all ladies are on the left side
-    int totalDevils = leftSide.whereType<Devil>().length;
-    int totalLadies = leftSide.whereType<Lady>().length;
-    if (totalDevils + totalLadies == 6) {
+    // Check if all cancer cells and all CAR-T cells are on the left side
+    int totalCancerCells = leftSide.whereType<CancerCell>().length;
+    int totalCARTCells = leftSide.whereType<CARTCell>().length;
+    if (totalCancerCells + totalCARTCells == 6) {
       endTime = DateTime.now();
       update();
       confettiController.play();
@@ -244,12 +240,12 @@ class GameController extends GetxController {
   void resetGame() {
     leftSide = [];
     rightSide = [
-      Devil(),
-      Devil(),
-      Devil(),
-      Lady(),
-      Lady(),
-      Lady(),
+      CancerCell(),
+      CancerCell(),
+      CancerCell(),
+      CARTCell(),
+      CARTCell(),
+      CARTCell(),
     ];
     onBoat = [];
     startTime = null;
