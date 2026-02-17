@@ -92,7 +92,7 @@ class GameController extends GetxController {
     }
     update();
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(milliseconds: 1500),
       () {
         checkGameEnd();
         disableInteraction = false;

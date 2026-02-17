@@ -12,7 +12,7 @@ import 'widgets/play_ground_widget.dart';
 import 'widgets/subject_widget.dart';
 
 const String instructions =
-'''A patient needs CAR-T cell therapy. Move 3 CAR-T cells and 3 cancer cells from the Tumor Microenvironment (right side) to the Lymph Node (left side). The transport vessel can carry only two cells at a time. Cancer cells must never outnumber CAR-T cells on either side, or the patient relapses. Can you safely move all 6 cells to the Lymph Node?''';
+    '''A patient needs CAR-T cell therapy. Move 3 CAR-T cells and 3 cancer cells from the Tumor Microenvironment (right side) to the Lymph Node (left side). The transport vessel can carry only two cells at a time. Cancer cells must never outnumber CAR-T cells on either side, or the patient relapses. Can you safely move all 6 cells to the Lymph Node?''';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({super.key});

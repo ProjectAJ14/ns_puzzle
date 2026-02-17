@@ -43,16 +43,18 @@ class BoatWidget extends StatelessWidget {
             ),
             Positioned(
               bottom: -boatHeight / 3,
-              child: Transform(
-                alignment: Alignment.center,
-                transform: isBoatOnLeftSide
-                    ? Matrix4.rotationY(0)
-                    : Matrix4.rotationY(math.pi), //Mirror Widget
-                child: Image.asset(
-                  'assets/images/boat.png',
-                  fit: BoxFit.fill,
-                  height: boatHeight,
-                  width: boatWidth,
+              child: IgnorePointer(
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: isBoatOnLeftSide
+                      ? Matrix4.rotationY(0)
+                      : Matrix4.rotationY(math.pi),
+                  child: Image.asset(
+                    'assets/images/boat.png',
+                    fit: BoxFit.fill,
+                    height: boatHeight,
+                    width: boatWidth,
+                  ),
                 ),
               ),
             ),
